@@ -1,23 +1,46 @@
-import Image from 'next/image'
+"use client";
+import { useState } from "react";
+import MobileNav from "./mobilenav";
+import Logo from "./logo";
+import Link from "next/link";
 
-export default function navbar() {
+export default function Navbar() { 
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
     return (
-      <>
-        <header className="bg-beige">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-2">
-                <div className='flex items-center'>
-                    <Image alt="logo" src="/logo-bare.png" width="100" height="100" />
-                    <Image alt="logo-word" src="/logo-word.png" width="150" height="50" />
+        <div className="fixed">
+        <MobileNav isOpen={isOpen} toggle={toggle} />
+        <header className="bg-slate-900 w-screen">
+            <nav className="flex max-w-screen-xl justify-between p-6 mx-auto">
+                <Logo />
+                <div className='hidden md:flex text-beige h-auto gap-14 items-center'>
+                    <Link href="/product" className="">
+                        Product
+                    </Link>
+                    <Link href="/about" className="">
+                        About
+                    </Link>
+                    <Link href="/faq" className="">
+                        FAQ
+                    </Link>
+                    <Link href="/" className="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                    </Link>
+                    
                 </div>
-                <div>
-                    <ul className='flex text-slate-900'>
-                        <li>About</li>
-                        <li>Product</li>
-                        <li>Hello</li>
-                    </ul>
-                </div>
+                <button type="button" className="inline-flex items-center md:hidden text-beige" onClick={toggle}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+
             </nav>
         </header>
-      </>
+        </div>
+        
     )
-  }
+}

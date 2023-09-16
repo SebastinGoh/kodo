@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Product() {
   return (
-    <main className='bg-blue'>
+    <main className='bg-orange'>
       <div className="h-screen flex flex-col items-center justify-center text-center gap-10">
         <Image src="/logo.png" width={200} height={200} alt="Kodo Logo" />
-        <div className="text-3xl font-semibold">HOME</div>
+        <div className="text-3xl font-semibold">PRODUCT</div>
       </div>
     </main>
   )
