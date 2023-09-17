@@ -10,7 +10,7 @@ export default function Navbar() {
         setIsOpen(!isOpen);
     };
     return (
-        <div className="fixed">
+        <>
         <MobileNav isOpen={isOpen} toggle={toggle} />
         <header className="bg-slate-900 w-screen">
             <nav className="flex max-w-screen-xl justify-between p-6 mx-auto">
@@ -40,7 +40,7 @@ export default function Navbar() {
 
             </nav>
         </header>
-        </div>
+        </>
         
     )
 }
