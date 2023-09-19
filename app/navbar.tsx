@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
         <>
         <MobileNav isOpen={isOpen} toggle={toggle} />
-        <header className="bg-slate-900 w-screen">
+        <header className="bg-slate-900">
             <nav className="flex max-w-screen-xl justify-between p-6 mx-auto">
                 <Logo />
                 <div className='hidden md:flex text-beige h-auto gap-14 items-center'>

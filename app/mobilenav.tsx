@@ -8,7 +8,7 @@ export default function MobileNav({
     toggle: () => void;
 }) {
     return (
-        <div className="fixed w-screen h-screen overflow-hidden bg-beige flex content-center justify-center "
+        <div className="fixed w-screen h-screen overflow-hidden bg-beige flex content-center justify-center z-50"
         style={{
             opacity: `${isOpen ? "1" : "0"}`,
             top: ` ${isOpen ? "0" : "-100%"}`,
