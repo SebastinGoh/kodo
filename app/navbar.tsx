@@ -12,10 +12,10 @@ export default function Navbar() {
     return (
         <>
         <MobileNav isOpen={isOpen} toggle={toggle} />
-        <header className="bg-slate-900">
+        <header className="bg-beige font-slate-900">
             <nav className="flex max-w-screen-xl justify-between p-6 mx-auto">
                 <Logo />
-                <div className='hidden md:flex text-beige h-auto gap-14 items-center'>
+                <div className='hidden md:flex h-auto gap-14 items-center'>
                     <Link href="/product" className="">
                         Product
                     </Link>
@@ -32,7 +32,7 @@ export default function Navbar() {
                     </Link>
                     
                 </div>
-                <button type="button" className="inline-flex items-center md:hidden text-beige" onClick={toggle}>
+                <button type="button" className="inline-flex items-center md:hidden" onClick={() => {toggle()}}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
