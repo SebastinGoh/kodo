@@ -19,9 +19,6 @@ export default function RootLayout({
     <html lang="en" className='scroll-smooth'>
       <body className={inter.className + " h-screen"}>
         <Navbar></Navbar>
-        <Navbar></Navbar>
-        <Navbar></Navbar>
-        <Navbar></Navbar>
         {children}
       </body>
     </html>

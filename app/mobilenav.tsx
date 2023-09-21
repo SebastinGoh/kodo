@@ -12,6 +12,7 @@ export default function MobileNav({
         style={{
             opacity: `${isOpen ? "1" : "0"}`,
             top: ` ${isOpen ? "0" : "-100%"}`,
+            display: ` ${isOpen ? "" : "none"}`,
         }}
         >
             <button className="absolute right-0 py-10 px-6" onClick={toggle}>
