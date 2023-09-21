@@ -23,6 +23,9 @@ export default function MobileNav({
 
             <ul className="text-center text-xl flex flex-col content-center justify-center gap-10">
                 <li>
+                    <Link href="/" onClick={toggle}><p>Home</p></Link>
+                </li>
+                <li>
                     <Link href="/product" onClick={toggle}><p>Product</p></Link>
                 </li>
                 <li>
