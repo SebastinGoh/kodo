@@ -1,6 +1,6 @@
 import Image from "next/image";
-import HeroVideo from "./herovideo";
-import USP from "./usp";
+import HeroVideo from "./home/herovideo";
+import USP from "./home/usp";
 
 export default function Home() {
   return (
