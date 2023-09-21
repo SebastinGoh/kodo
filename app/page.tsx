@@ -4,7 +4,7 @@ import USP from "./home/usp";
 
 export default function Home() {
   return (
-    <main className='bg-blue h-full'>
+    <main className='bg-blue max-h-fit'>
         <HeroVideo />
         <USP />
     </main>
