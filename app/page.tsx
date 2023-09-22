@@ -3,6 +3,7 @@ import HeroVideo from "./home/herovideo";
 import USP from "./home/usp";
 import Catalogue from "./catalogue";
 import Socials from "./socials";
+import Footer from "./footer";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <USP />
       <Catalogue />
       <Socials />
+      <Footer />
     </main>
   )
 }
