@@ -16,7 +16,7 @@ export default function Navbar() {
             <nav className="max-w-6xl mx-auto flex justify-between items-center p-5 md:p-6 lg:max-w-7xl">
                 <Logo />
                 <div className='hidden md:flex h-auto gap-14 items-center'>
-                    <Link href="/product" className="">
+                    <Link href="/products" className="">
                         Products
                     </Link>
                     <Link href="/about" className="">

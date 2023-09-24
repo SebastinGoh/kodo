@@ -9,7 +9,7 @@ export default function Footer() {
                         <h2 className="mb-6 uppercase font-semibold">Sitemap</h2>
                         <ul className="font-md">
                             <li className="mb-4">
-                                <Link href="/product" className="hover:underline">Products</Link>
+                                <Link href="/products" className="hover:underline">Products</Link>
                             </li>
                             <li className="mb-4">
                                 <Link href="/about" className="hover:underline">About</Link>

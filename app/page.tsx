@@ -9,7 +9,9 @@ export default function Home() {
     <main className='bg-blue max-h-fit'>
       <HeroVideo />
       <USP />
-      <Catalogue />
+      <Catalogue 
+        showHome={true}
+      />
       <Socials />
     </main>
   )

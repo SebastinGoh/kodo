@@ -26,7 +26,7 @@ export default function MobileNav({
                     <Link href="/" onClick={toggle}><p>Home</p></Link>
                 </li>
                 <li>
-                    <Link href="/product" onClick={toggle}><p>Products</p></Link>
+                    <Link href="/products" onClick={toggle}><p>Products</p></Link>
                 </li>
                 <li>
                     <Link href="/about" onClick={toggle}><p>About</p></Link>
