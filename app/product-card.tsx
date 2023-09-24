@@ -13,7 +13,7 @@ export default function ProductCard() {
                 <p className="mb-2 text-slate-800">
                     - SGD $12.00
                 </p>
-                <p className="mb-5 text-slate-900">
+                <p className="mb-8 text-slate-900">
                     With 2.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, 
                     this resealable sandbox provides endless hours of creative play!
                 </p>

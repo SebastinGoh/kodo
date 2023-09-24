@@ -13,11 +13,11 @@ export default function Navbar() {
         <>
         <MobileNav isOpen={isOpen} toggle={toggle} />
         <header className="bg-beige font-slate-900">
-            <nav className="flex max-w-6xl mx-auto p-6 justify-between items-center">
+            <nav className="max-w-6xl mx-auto flex justify-between items-center p-5 md:p-6 lg:max-w-7xl">
                 <Logo />
                 <div className='hidden md:flex h-auto gap-14 items-center'>
                     <Link href="/product" className="">
-                        Product
+                        Products
                     </Link>
                     <Link href="/about" className="">
                         About

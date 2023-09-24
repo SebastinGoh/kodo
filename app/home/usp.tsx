@@ -4,9 +4,9 @@ export default function USP() {
     const video = "/hero_video_L.mp4";
     return (
         <div className="">
-            <div className="bg-pink w-full py-2" id="usp"></div>
+            <div className="bg-pink w-full py-2 transition duration-[3000ms] ease-in-out" id="usp"></div>
             <div className="bg-clay-bg w-full flex justify-center py-14 text-center">
-                <div className="text-white drop-shadow-lg font-bold text-lg max-w-2xl px-4 md:px-0 md:text-2xl">
+                <div className="text-white drop-shadow-xl font-semibold text-lg max-w-2xl px-4 md:px-0 md:text-2xl">
                     It's mesmerizing, it's satisfying, and once it's in your kids' hands they can't put it down. 
                     It's hands on play for their curious minds! Mold their imagination and let their creativity flow! 
                     Watch them explore, shape, slice, scoop, squish, smush and flow again and again!
@@ -26,13 +26,13 @@ export default function USP() {
                             BUY NOW
                         </Link>
                     </div>
-                    <video src={video} className="max-w-xs md:max-w-lg border-4 border-white" autoPlay muted controls loop={true} playsInline>
+                    <video src={video} className="max-w-xs md:max-w-lg border-4 border-white" autoPlay muted loop={true} playsInline>
                     </video>
                 </div>
             </div>
             <div className="bg-green w-full flex justify-center py-14">
                 <div className="max-w-4xl flex flex-wrap-reverse justify-center items-center gap-10 md:flex-nowrap">
-                    <video src={video} className="max-w-xs md:max-w-lg border-4 border-white" autoPlay muted controls loop={true} playsInline>
+                    <video src={video} className="max-w-xs md:max-w-lg border-4 border-white" autoPlay muted loop={true} playsInline>
                     </video>
                     <div className="text-md text-center px-4 md:text-left">
                         <p className="font-bold md:text-lg">
