@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (       
         <footer className="bg-beige text-slate-900">
@@ -7,30 +9,35 @@ export default function Footer() {
                         <h2 className="mb-6 uppercase font-semibold">Sitemap</h2>
                         <ul className="font-md">
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Products</a>
+                                <Link href="/product" className="hover:underline">Products</Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">About</a>
+                                <Link href="/about" className="hover:underline">About</Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">FAQ</a>
+                                <Link href="/faq" className="hover:underline">FAQ</Link>
+                            </li>
+                            <li className="mb-4">
+                                <Link href="/contactus" className="hover:underline">Contact Us</Link>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 uppercase font-semibold">Policies</h2>
+                        <Link href="/policies" className="hover:underline">
+                            <h2 className="mb-6 uppercase font-semibold">Policies</h2>
+                        </Link>
                         <ul className="font-md">
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Privacy</a>
+                                <Link href="/policies#privacy" className="hover:underline">Privacy</Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Terms & Conditions</a>
+                                <Link href="/policies#termsandconditions" className="hover:underline">Terms & Conditions</Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Shipping & Delivery</a>
+                                <Link href="/policies#shippinganddelivery" className="hover:underline">Shipping & Delivery</Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Returns & Refunds</a>
+                                <Link href="/policies#returnsandrefunds" className="hover:underline">Returns & Refunds</Link>
                             </li>
                         </ul>
                     </div>
