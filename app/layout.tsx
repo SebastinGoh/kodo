@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from './navbar/navbar'
+import Footer from "./footer";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className + " h-screen"}>
         <Navbar></Navbar>
         {children}
+        <Footer />
       </body>
     </html>
   )

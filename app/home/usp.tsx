@@ -4,7 +4,7 @@ export default function USP() {
     const video = "/hero_video_L.mp4";
     return (
         <div className="">
-            <div className="bg-pink w-full py-2 transition duration-[3000ms] ease-in-out" id="usp"></div>
+            <div className="bg-pink w-full py-2" id="usp"></div>
             <div className="bg-clay-bg w-full flex justify-center py-14 text-center">
                 <div className="text-white drop-shadow-xl font-semibold text-lg max-w-2xl px-4 md:px-0 md:text-2xl">
                     It's mesmerizing, it's satisfying, and once it's in your kids' hands they can't put it down. 
