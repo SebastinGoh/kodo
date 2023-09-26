@@ -1,5 +1,5 @@
 import ProductCard from "./product-card";
-import data from "./products.js";
+import data from "./products";
 
 export default function Catalogue({
     showHome = false
@@ -8,10 +8,13 @@ export default function Catalogue({
 }) {
     const products = data.map(product => {
         return <ProductCard 
-            mainImg={product.mainImg} 
+            id = {product.id}
             name={product.name}
-            price={product.price}
+            URLname={product.URLname}
             description={product.description}
+            price={product.price}
+            mainImg={product.mainImg}
+            otherImgsArray={product.otherImgs}
         />
     })
     if (showHome) {

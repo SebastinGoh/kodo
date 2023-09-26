@@ -1,27 +1,34 @@
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function ProductCard({ 
-    mainImg, name, price, description
+    id, name, URLname, description, price, mainImg, otherImgsArray
 } : { 
-    mainImg: string, name: string, price: number, description: string 
+    id:string, 
+    name:string, 
+    URLname:string, 
+    description:string, 
+    price:number, 
+    mainImg:string, 
+    otherImgsArray:Array<string>,
 }) {
     return (
-        <div className="max-w-xs border bg-white rounded-lg flex-none">
+        <div className="max-w-xs border bg-white rounded-lg pb-4 flex-none">
             <div className="w-full h-80 overflow-hidden">
-                <img className="rounded-t-lg" src={`./product/${mainImg}`} alt={name} />
+                <Image className="rounded-t-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
             </div>
             <div className="p-5">
-                <a href="#" className="hover:underline">
+                <Link href={`/products/${URLname}`} className="hover:underline">
                     <h5 className="text-2xl font-bold text-slate-900">{name}</h5>
-                </a>
+                </Link>
                 <p className="mb-2 text-slate-800">
                     - SGD ${price}
                 </p>
                 <p className="mb-8 text-slate-900">
                     {description}
                 </p>
-                <Link className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href="#">
-                    BUY NOW
+                <Link id={id} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                    ADD TO CART
                 </Link>
             </div>
         </div>

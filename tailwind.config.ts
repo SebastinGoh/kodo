@@ -22,6 +22,9 @@ const config: Config = {
         'blue':'#69b6d9',
         'orange':'#f6a841',
       },
+      borderRadius: {
+        'lg': '35px',
+      },
     },
   },
   plugins: [],
