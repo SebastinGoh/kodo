@@ -11,6 +11,12 @@ export default [
             "product-sub2.jpg", 
             "product-sub3.jpg"
         ],
+        included: [
+            "1.5lbs of Kinetic Beach Sand",
+            "1 Plastic Sand Molds",
+            "1 Plastic Sandbox Tray",
+            "1 Plastic Sand Shovel"
+        ],
     },
     {
         id: "2",
@@ -23,6 +29,12 @@ export default [
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"
+        ],
+        included: [
+            "2.5lbs of Kinetic Beach Sand",
+            "2 Plastic Sand Molds",
+            "2 Plastic Sandbox Tray",
+            "2 Plastic Sand Shovel"
         ],
     },
     {
@@ -37,6 +49,12 @@ export default [
             "product-sub2.jpg", 
             "product-sub3.jpg"
         ],
+        included: [
+            "3.5lbs of Kinetic Beach Sand",
+            "3 Plastic Sand Molds",
+            "3 Plastic Sandbox Tray",
+            "3 Plastic Sand Shovel"
+        ],
     },
     {
         id: "4",
@@ -49,6 +67,12 @@ export default [
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"
+        ],
+        included: [
+            "4.5lbs of Kinetic Beach Sand",
+            "4 Plastic Sand Molds",
+            "4 Plastic Sandbox Tray",
+            "4 Plastic Sand Shovel"
         ],
     }
 ]

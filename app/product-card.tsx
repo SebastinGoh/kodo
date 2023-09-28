@@ -13,10 +13,10 @@ export default function ProductCard({
     otherImgsArray:Array<string>,
 }) {
     return (
-        <div key={id} className="max-w-xs border bg-white rounded-lg pb-4 flex-none">
-            <div className="w-full h-80 overflow-hidden">
+        <div key={id} className="max-w-xs border bg-white rounded-lg pb-4 flex-none shadow">
+            <Link href={`/products/${URLname}`} className="w-full h-80 overflow-hidden">
                 <Image className="rounded-t-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
-            </div>
+            </Link>
             <div className="p-5">
                 <Link href={`/products/${URLname}`} className="hover:underline">
                     <h5 className="text-2xl font-bold text-slate-900">{name}</h5>

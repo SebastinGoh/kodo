@@ -53,12 +53,7 @@ export default function Product() {
 
     // End of Embla Carousel
 
-    // Display product details
-    const params = useParams();
-    const URLname = params.URLname;
-    const product = data.find(product => product.URLname == URLname);
-
-    // Initialise quantity selector
+    // Quantity selector
     const [quantity, setQuantity] = useState(1);
     
     function minusQuantity() {
@@ -70,6 +65,12 @@ export default function Product() {
     function addQuantity() {
         setQuantity(quantity+1)
     }
+    // End of Quantity selector
+
+    // Display product details
+    const params = useParams();
+    const URLname = params.URLname;
+    const product = data.find(product => product.URLname == URLname);
 
     if (product) {
         const id:string = product.id;
@@ -81,109 +82,122 @@ export default function Product() {
         const otherImgs = otherImgsArray.map(img => {
             return (
                 <div key={img} className="grow-0 shrink-0 basis-full flex justify-center items-center">
-                    <Image key={img} className="rounded-lg" src={`/product/${img}`} height={100} width={300} alt={img} />
+                    <Image key={img} className="" src={`/product/${img}`} height={100} width={400} alt={img} />
                 </div>
+            )
+        })
+        const includedArray:Array<string> = product.included;
+        const included = includedArray.map(item => {
+            return (
+                <li key={item}>
+                    {item}
+                </li>
             )
         })
         return (
             <main className="bg-orange w-full text-slate-900">
-                <div className="max-w-6xl mx-auto flex flex-col items-center justify-center gap-8 text-center p-6">
+                <div className="bg-white rounded-b-lg pb-4 shadow-lg">
                     {/* Embla Carousel */}
-                    <div>
-                        <div className="overflow-hidden w-full" ref={emblaRef}>
+                    <div className='w-full relative'>
+                        <div className="overflow-hidden" ref={emblaRef}>
                             <div className="flex">
                                 <div className="grow-0 shrink-0 basis-full flex justify-center items-center">
-                                    <Image key={mainImg} className="rounded-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
+                                    <Image key={mainImg} className="" src={`/product/${mainImg}`} width={400} height={100} alt={name} />
                                 </div>
                                 {otherImgs}
                             </div>
                         </div>
-                        <div className='text-3xl flex justify-center items-center gap-4 mt-4'>
-                            <button className="" onClick={scrollPrev}>
-                                <svg fill="currentColor" viewBox="0 0 1024 1024" className="w-8 h-8">
-                                    <path d="M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z" />
-                                </svg>
+                        <button className="absolute inset-y-0 left-0" onClick={scrollPrev}>
+                            <svg fill="currentColor" viewBox="0 0 16 16" className="w-12 h-8">
+                                <path fillRule="evenodd" d="M9.224 1.553a.5.5 0 01.223.67L6.56 8l2.888 5.776a.5.5 0 11-.894.448l-3-6a.5.5 0 010-.448l3-6a.5.5 0 01.67-.223z"/>
+                            </svg>
+                        </button>
+                            
+                        <button className="absolute inset-y-0 right-0" onClick={scrollNext}>
+                            <svg fill="currentColor" viewBox="0 0 16 16" className="w-12 h-8">
+                                <path fillRule="evenodd" d="M6.776 1.553a.5.5 0 01.671.223l3 6a.5.5 0 010 .448l-3 6a.5.5 0 11-.894-.448L9.44 8 6.553 2.224a.5.5 0 01.223-.671z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div className="flex justify-center items-center gap-4 mt-4">
+                        {scrollSnaps.map((snap, index) => (
+                            <button
+                                key={index}
+                                className={`rounded-full h-1 px-3 ${index === selectedIndex ? "bg-slate-900" : "bg-slate-500"}`}
+                                onClick={() => scrollTo(index)}
+                            >
                             </button>
-                            {scrollSnaps.map((snap, index) => (
-                                <button
-                                    key={index}
-                                    className={`rounded-full h-1 px-3 ${index === selectedIndex ? "bg-slate-900" : "bg-slate-500"}`}
-                                    onClick={() => scrollTo(index)}
-                                >
-                                </button>
-                            ))}
-                            <button className="" onClick={scrollNext}>
-                                <svg fill="currentColor" viewBox="0 0 1024 1024" className="w-8 h-8">
-                                    <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z" />
-                                </svg>
-                            </button>
-                        </div>
+                        ))}
                     </div>
                     {/* End of Embla Carousel */}
-                    <h5 className="text-2xl font-bold">{name}</h5>
-                    <p className="text-lg">
-                        SGD${price}.00 per set
-                    </p>
-                    <hr className="w-48 h-1 mx-auto bg-slate-900 border-0 rounded" />
-                    <div className='flex items-center gap-4'>
-                        <span>
-                            Quantity
-                        </span>
-                        <div className="text-2xl rounded-full flex h-12 bg-gray-300">
-                            <button onClick={minusQuantity} className="w-12 rounded-l-full border cursor-pointer">
-                                −
-                            </button>
-                            <span className="font-semibold border w-16 flex items-center justify-center">
-                                {quantity}
+                    <div className="max-w-6xl mx-auto flex flex-col items-center justify-center gap-8 text-center p-6">
+                        
+                        <h5 className="text-2xl font-bold">{name}</h5>
+                        <p className="text-lg">
+                            SGD${price}.00 per set
+                        </p>
+                        <hr className="w-48 h-1 mx-auto bg-slate-900 border-0 rounded" />
+                        <div className='flex items-center gap-4'>
+                            <span>
+                                Quantity
                             </span>
-                            <button onClick={addQuantity} className="w-12 rounded-r-full border cursor-pointer">
-                                +
-                            </button>
+                            <div className="text-2xl rounded-full flex h-12 bg-gray-300">
+                                <button onClick={minusQuantity} className="w-12 rounded-l-full border cursor-pointer">
+                                    −
+                                </button>
+                                <span className="font-semibold border w-16 flex items-center justify-center">
+                                    {quantity}
+                                </span>
+                                <button onClick={addQuantity} className="w-12 rounded-r-full border cursor-pointer">
+                                    +
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-4 w-full">
-                        <Link id={id} className="bg-transparent border-2 text-white rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
-                            ADD TO CART
-                        </Link>
-                        <Link id={id} className="bg-beige rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
-                            BUY NOW
-                        </Link>
-                    </div>
-                    <div className="flex flex-col gap-6 text-start">
-                        <p className="">
-                            {description}
-                        </p>
-                        <p className="underline font-semibold">
-                            What's included:
-                        </p>
-                        <p className="">
-                            <ul className="list-disc list-inside">
-                                <li>1 kg glittery water beads</li>
-                            </ul>
-                        </p>
-                        <span className="self-center">
-                            *
-                        </span>
-                        <div className="italic">
-                            For tips on how to care for your water beads, please read our <Link className="underline" href="/faq">FAQ</Link>
-                            <p className='mt-4'>
-                                Adult supervision required. 
-                                Contains small pieces that may be a choking hazard to smaller children. 
-                                Not intended for consumption. 
-                                When not in use, please keep beads in jar away from direct sunlight. 
-                                Wash hands before and after playing. 
+                        <div className="flex flex-col gap-4 w-full">
+                            <Link id={id} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                                ADD TO CART
+                            </Link>
+                            <Link id={id} className="bg-beige rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                                BUY NOW
+                            </Link>
+                        </div>
+                        <div className="flex flex-col gap-6 text-start">
+                            <p className="">
+                                {description}
                             </p>
+                            <p className="underline font-semibold">
+                                What's included:
+                            </p>
+                            <p className="">
+                                <ul className="list-disc list-inside">
+                                    {included}
+                                </ul>
+                            </p>
+                            <span className="self-center">
+                                *
+                            </span>
+                            <div className="italic">
+                                For tips on how to care for your water beads, please read our <Link className="underline" href="/faq">FAQ</Link>
+                                <p className='mt-4'>
+                                    Adult supervision required. 
+                                    Contains small pieces that may be a choking hazard to smaller children. 
+                                    Not intended for consumption. 
+                                    When not in use, please keep beads in jar away from direct sunlight. 
+                                    Wash hands before and after playing. 
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-orange w-full flex flex-col items-center justify-center text-center pt-10">
+                <div className="bg-orange w-full flex flex-col items-center justify-center text-center mt-10">
                     <div className="font-semibold text-2xl">
                         Related Products
                     </div>
                     <hr className="w-48 h-1 mx-auto bg-slate-900 border-0 rounded mt-4" /> 
                 </div>
-                <Catalogue 
-                    showHome={true}
+                <Catalogue
+                    showGrid={false}
+                    exclude={[id]}
                 />
             </main>
         )

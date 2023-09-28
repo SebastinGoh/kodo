@@ -11,7 +11,8 @@ export default function Product() {
         <hr className="w-48 h-1 mx-auto bg-slate-900 border-0 rounded my-4" /> 
       </div>
       <Catalogue 
-        showHome={false} 
+        showGrid={true}
+        exclude={[]}
       />
     </main>
   )

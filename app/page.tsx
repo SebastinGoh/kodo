@@ -10,7 +10,8 @@ export default function Home() {
       <HeroVideo />
       <USP />
       <Catalogue 
-        showHome={true}
+        showGrid={false}
+        exclude={[]}
       />
       <Socials />
     </main>
