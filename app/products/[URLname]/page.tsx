@@ -80,46 +80,41 @@ export default function Product() {
         const otherImgsArray:Array<string> = product.otherImgs;
         const otherImgs = otherImgsArray.map(img => {
             return (
-                <div className="grow-0 shrink-0 basis-full flex justify-center items-center">
-                    <Image className="rounded-lg" src={`/product/${img}`} height={100} width={300} alt={img} />
+                <div key={img} className="grow-0 shrink-0 basis-full flex justify-center items-center">
+                    <Image key={img} className="rounded-lg" src={`/product/${img}`} height={100} width={300} alt={img} />
                 </div>
             )
         })
         return (
             <main className="bg-orange w-full text-slate-900">
                 <div className="max-w-6xl mx-auto flex flex-col items-center justify-center gap-8 text-center p-6">
-                    <Link className="self-start bg-beige rounded-full flex items-center gap-2 py-2 px-8 hover:bg-pink lg:text-lg" href="/products">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                        </svg>
-                        All Products
-                    </Link>
                     {/* Embla Carousel */}
                     <div>
                         <div className="overflow-hidden w-full" ref={emblaRef}>
                             <div className="flex">
                                 <div className="grow-0 shrink-0 basis-full flex justify-center items-center">
-                                    <Image className="rounded-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
+                                    <Image key={mainImg} className="rounded-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
                                 </div>
                                 {otherImgs}
                             </div>
                         </div>
                         <div className='text-3xl flex justify-center items-center gap-4 mt-4'>
                             <button className="" onClick={scrollPrev}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                <svg fill="currentColor" viewBox="0 0 1024 1024" className="w-8 h-8">
+                                    <path d="M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z" />
                                 </svg>
                             </button>
                             {scrollSnaps.map((snap, index) => (
                                 <button
+                                    key={index}
                                     className={`rounded-full h-1 px-3 ${index === selectedIndex ? "bg-slate-900" : "bg-slate-500"}`}
                                     onClick={() => scrollTo(index)}
                                 >
                                 </button>
                             ))}
                             <button className="" onClick={scrollNext}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                <svg fill="currentColor" viewBox="0 0 1024 1024" className="w-8 h-8">
+                                    <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z" />
                                 </svg>
                             </button>
                         </div>
@@ -163,8 +158,6 @@ export default function Product() {
                         </p>
                         <p className="">
                             <ul className="list-disc list-inside">
-                                <li>1 kg glittery water beads</li>
-                                <li>1 kg glittery water beads</li>
                                 <li>1 kg glittery water beads</li>
                             </ul>
                         </p>

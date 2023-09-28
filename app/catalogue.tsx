@@ -8,6 +8,7 @@ export default function Catalogue({
 }) {
     const products = data.map(product => {
         return <ProductCard 
+            key={product.id}
             id = {product.id}
             name={product.name}
             URLname={product.URLname}

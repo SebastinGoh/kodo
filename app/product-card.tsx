@@ -13,7 +13,7 @@ export default function ProductCard({
     otherImgsArray:Array<string>,
 }) {
     return (
-        <div className="max-w-xs border bg-white rounded-lg pb-4 flex-none">
+        <div key={id} className="max-w-xs border bg-white rounded-lg pb-4 flex-none">
             <div className="w-full h-80 overflow-hidden">
                 <Image className="rounded-t-lg" src={`/product/${mainImg}`} width={350} height={100} alt={name} />
             </div>
