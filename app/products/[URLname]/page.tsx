@@ -134,7 +134,7 @@ export default function Product() {
                         
                         <h5 className="text-2xl font-bold">{name}</h5>
                         <p className="text-lg">
-                            SGD${price}.00 per set
+                            SGD${price} per set
                         </p>
                         <hr className="w-48 h-1 mx-auto bg-slate-900 border-0 rounded" />
                         <div className='flex items-center gap-4'>
@@ -162,17 +162,17 @@ export default function Product() {
                             </Link>
                         </div>
                         <div className="flex flex-col gap-6 text-start">
-                            <p className="">
+                            <div className="">
                                 {description}
-                            </p>
+                            </div>
                             <p className="underline font-semibold">
                                 What's included:
                             </p>
-                            <p className="">
+                            <div className="">
                                 <ul className="list-disc list-inside">
                                     {included}
                                 </ul>
-                            </p>
+                            </div>
                             <span className="self-center">
                                 *
                             </span>
@@ -202,6 +202,7 @@ export default function Product() {
             </main>
         )
     } else {
+    // If product not found
         return (
             <div className="bg-orange w-full h-1/2 flex flex-col items-center justify-center text-center py-8">
                 <div className="font-semibold text-2xl">
