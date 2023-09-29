@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import Catalogue from "../catalogue";
 
 const FaqAccordion = dynamic(() => import("./faq-accordion"), {
   ssr: false,
@@ -12,9 +14,21 @@ export default function FAQ() {
           FAQs
         </div>
       </div>
-      <div className="max-w-6xl mx-auto pb-8">
-        <FaqAccordion/>  
+      <div className="max-w-6xl mx-auto pb-4">
+        <FaqAccordion/>
       </div>
+      <div className="w-full flex flex-col items-center justify-center text-center p-6">
+        <div className="text-md">
+          If your question is not here, feel free to&nbsp;
+          <Link href="/contact" className="underline">
+            contact us
+          </Link>
+        </div>
+      </div>
+      <Catalogue 
+        showGrid={false}
+        exclude={[]}
+      />
     </main>
   )
 }
