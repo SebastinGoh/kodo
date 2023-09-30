@@ -18,7 +18,7 @@ export default function Footer() {
                                 <Link href="/faq" className="hover:underline">FAQ</Link>
                             </li>
                             <li className="mb-4">
-                                <Link href="/contactus" className="hover:underline">Contact Us</Link>
+                                <Link href="/contact" className="hover:underline">Contact Us</Link>
                             </li>
                         </ul>
                     </div>
