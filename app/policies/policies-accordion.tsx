@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import policies from "@/app/policies/policies";
-import { useRouter } from 'next/navigation'
+import "tw-elements/dist/css/tw-elements.min.css";
 
 const PoliciesAccordion = () => {
   useEffect(() => {

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import faq from "@/app/faq/faq";
+import "tw-elements/dist/css/tw-elements.min.css";
 
 const FaqAccordion = () => {
   useEffect(() => {
