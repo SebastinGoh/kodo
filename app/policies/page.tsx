@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import "tw-elements/dist/css/tw-elements.min.css";
 
 const PoliciesAccordion = dynamic(() => import("./policies-accordion"), {
   ssr: false,
