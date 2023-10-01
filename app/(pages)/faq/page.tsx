@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Catalogue from "@/app/components/products/catalogue";
-import "tw-elements/dist/css/tw-elements.min.css";
 
 const FaqAccordion = dynamic(() => import("./faq-accordion"), {
   ssr: false,

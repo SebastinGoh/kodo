@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import policies from "@/app/data/policies";
-import "tw-elements/dist/css/tw-elements.min.css";
 
 const PoliciesAccordion = () => {
   useEffect(() => {
