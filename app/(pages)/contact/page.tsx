@@ -1,7 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
-import Catalogue from "@/app/catalogue";
-import ContactForm from '@/app/contact/contact-form';
+import Catalogue from "@/app/components/products/catalogue";
+import ContactForm from '@/app/(pages)/contact/contact-form';
 
 export default function ContactPage() {
     

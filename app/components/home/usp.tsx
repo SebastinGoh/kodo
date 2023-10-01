@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export default function USP() {
     const video = "/hero_video_L.mp4";

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import MobileNav from "./mobilenav";
-import Logo from "./logo";
+import MobileNav from "@/app/components/navbar/mobilenav";
+import Logo from "@/app/components/navbar/logo";
 import Link from "next/link";
 
 export default function Navbar() { 

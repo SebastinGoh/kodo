@@ -1,4 +1,4 @@
-import Catalogue from "../catalogue";
+import Catalogue from "@/app/components/products/catalogue";
 
 export default function Product() {
   const showWhere = "home";

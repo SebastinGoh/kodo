@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import Catalogue from "../catalogue";
+import Catalogue from "@/app/components/products/catalogue";
 
 export default function About() {
   const video = "/hero_video_S.mp4";

@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from "next/link";
-import data from "@/app/products";
+import data from "@/app/data/products";
 import Image from 'next/image';
-import Catalogue from '@/app/catalogue';
+import Catalogue from '@/app/components/products/catalogue';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 
 export default function Product() {

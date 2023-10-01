@@ -1,7 +1,7 @@
-import HeroVideo from "./home/herovideo";
-import USP from "./home/usp";
-import Catalogue from "./catalogue";
-import Socials from "./socials";
+import HeroVideo from "@/app/components/home/herovideo";
+import USP from "@/app/components/home/usp";
+import Catalogue from "@/app/components/products/catalogue";
+import Socials from "@/app/components/home/socials";
 
 
 export default function Home() {

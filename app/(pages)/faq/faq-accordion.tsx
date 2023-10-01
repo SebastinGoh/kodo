@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import faq from "@/app/faq/faq";
+import faq from "@/app/data/faq";
 import "tw-elements/dist/css/tw-elements.min.css";
 
 const FaqAccordion = () => {

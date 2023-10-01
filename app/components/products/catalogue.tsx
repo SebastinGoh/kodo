@@ -1,5 +1,5 @@
-import ProductCard from "./product-card";
-import data from "./products";
+import ProductCard from "@/app/components/products/product-card";
+import data from "@/app/data/products";
 
 export default function Catalogue({
     showGrid = false,
