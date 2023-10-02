@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { sendEmail } from '@/app/(pages)/contact/send-email';
 
 export type FormData = {
-  category: string;
   name: string;
   email: string;
   message: string;
@@ -15,7 +14,7 @@ const ContactForm: FC = () => {
     const { 
       register, 
       handleSubmit, 
-    } = useForm<FormData>({ defaultValues: { category: "Enquiry Category" }});
+    } = useForm<FormData>();
 
     function onSubmit(data: FormData) {
       sendEmail(data);
@@ -23,18 +22,6 @@ const ContactForm: FC = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div className='w-full px-4 py-3 text-base  border border-gray-300 rounded-lg bg-gray-50'>
-            <select 
-              className='w-full text-base text-gray-400 bg-gray-50 text-lg focus:shadow-md'
-              {...register('category', { required: true })}
-            >
-              <option selected>Enquiry Category</option>
-              <option value="General Enquiries">General Enquiries</option>
-              <option value="Product Feedback">Product Feedback</option>
-              <option value="Custom Order">Custom Order</option>
-              <option value="Collaboration">Collaboration</option>
-            </select>
-          </div>
           <input
             type='text'
             placeholder='Name'
