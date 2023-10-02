@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
 export async function POST(request: NextRequest) {
-  const { email, name, message } = await request.json();
+  const { category, email, name, message } = await request.json();
 
   const transport = nodemailer.createTransport({
     service: 'gmail',
@@ -17,8 +17,19 @@ export async function POST(request: NextRequest) {
     from: process.env.MY_EMAIL,
     to: process.env.MY_EMAIL,
     cc: email,
-    subject: `Message from ${name} (${email})`,
-    text: message,
+    subject: `${category} from ${name} - ${email}`,
+    text: 
+    `
+Dear ${name},
+\n
+Thank you for contacting Kodo. We will get back to you as soon as possible.
+\n
+Your message to us is as follows:
+${message}
+\n
+Best Regards,
+Kodo Team
+    `,
   };
 
   const sendMailPromise = () =>
