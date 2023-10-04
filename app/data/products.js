@@ -5,8 +5,8 @@ export default [
         URLname: "amazing-dough-set-1",
         description: "With 1.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, this resealable sandbox provides endless hours of creative play!",
         price: 11.99,
-        mainImg: "product-main.jpg",
-        otherImgs: [
+        images: [
+            "product-main.jpg",
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"
@@ -24,8 +24,8 @@ export default [
         URLname: "amazing-dough-set-2",
         description: "With 2.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, this resealable sandbox provides endless hours of creative play!",
         price: 12.99,
-        mainImg: "product-main.jpg",
-        otherImgs: [
+        images: [
+            "product-main.jpg",
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"
@@ -43,8 +43,8 @@ export default [
         URLname: "amazing-dough-set-3",
         description: "With 3.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, this resealable sandbox provides endless hours of creative play!",
         price: 13.99,
-        mainImg: "product-main.jpg",
-        otherImgs: [
+        images: [
+            "product-main.jpg",
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"
@@ -62,8 +62,8 @@ export default [
         URLname: "amazing-dough-set-4",
         description: "With 4.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, this resealable sandbox provides endless hours of creative play!",
         price: 14.99,
-        mainImg: "product-main.jpg",
-        otherImgs: [
+        images: [
+            "product-main.jpg",
             "product-sub1.jpg", 
             "product-sub2.jpg", 
             "product-sub3.jpg"

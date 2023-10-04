@@ -74,11 +74,11 @@ export default function Product() {
 
     if (product) {
         const id:string = product.id;
-        const mainImg:string = product.mainImg;
+        const mainImg:string = product.images[0];
         const name:string = product.name;
         const price:number = product.price;
         const description:string = product.description;
-        const otherImgsArray:Array<string> = product.otherImgs;
+        const otherImgsArray:Array<string> = product.images.slice(1);
         const otherImgs = otherImgsArray.map(img => {
             return (
                 <div key={img} className="grow-0 shrink-0 basis-full flex justify-center items-center">

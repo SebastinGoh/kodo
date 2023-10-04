@@ -1,5 +1,10 @@
 import ProductCard from "@/app/components/products/product-card";
 import data from "@/app/data/products";
+import { Product } from "@/app/types.d"
+
+interface Props {
+	product: Product
+}
 
 export default function Catalogue({
     showGrid = false,
@@ -11,13 +16,7 @@ export default function Catalogue({
     const products = data.map(product => {
         return <ProductCard 
             key={product.id}
-            id = {product.id}
-            name={product.name}
-            URLname={product.URLname}
-            description={product.description}
-            price={product.price}
-            mainImg={product.mainImg}
-            otherImgsArray={product.otherImgs}
+            product={product}
         />
     })
     if (exclude.length > 0) {
