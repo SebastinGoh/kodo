@@ -3,15 +3,35 @@ import { useState } from "react";
 import MobileNav from "@/app/components/navbar/mobilenav";
 import Logo from "@/app/components/navbar/logo";
 import Link from "next/link";
+import Drawer from "@/app/components/drawer";
+import { useCartStore } from "@/app/store/useCartStore";
+import useFromStore from "@/app/hooks/useFromStore";
 
 export default function Navbar() { 
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
         setIsOpen(!isOpen);
     };
+    
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const toggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
+    const closeAll = () => {
+        setIsOpen(false);
+        setIsDrawerOpen(false);
+    };
+
+    // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
+    const totalItems = useFromStore(useCartStore, state => state.totalItems)
+
+    const showTotalItems = (typeof(totalItems) == "undefined" || totalItems === 0) ? false : true;
+
     return (
         <>
-        <MobileNav isOpen={isOpen} toggle={toggle} />
+        <MobileNav isOpen={isOpen} toggle={toggle} toggleDrawer={toggleDrawer} showTotalItems={showTotalItems} totalItems={totalItems}/>
+        <Drawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} showTotalItems={showTotalItems} closeAll={closeAll}/>
         <header className="bg-beige font-slate-900">
             <nav className="max-w-6xl mx-auto flex justify-between items-center p-5 md:p-6 lg:max-w-7xl">
                 <Logo />
@@ -25,11 +45,19 @@ export default function Navbar() {
                     <Link href="/faq" className="">
                         FAQ
                     </Link>
-                    <Link href="/" className="">
+                    <a onClick={toggleDrawer} className="relative cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                         </svg>
-                    </Link>
+                        <span className='absolute -top-2 -right-3 rounded-full text-center bg-orange w-5 h-5 text-sm'
+                        style={{
+                            opacity: `${showTotalItems ? "1" : "0"}`,
+                            display: ` ${showTotalItems ? "" : "none"}`,
+                        }}
+                        >
+                            {totalItems}
+                        </span>
+                    </a>
                 </div>
                 <Link href="#" className="md:hidden cursor-pointer" onClick={toggle}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
