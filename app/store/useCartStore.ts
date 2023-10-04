@@ -1,3 +1,4 @@
+// File to initialize the Cart store and define actions
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

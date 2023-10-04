@@ -1,3 +1,4 @@
+// Hook to get data from store using useEffect (After render)
 import { useEffect, useState } from "react";
 
 export default function useFromStore<T, F>(

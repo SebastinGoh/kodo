@@ -1,3 +1,4 @@
+// File to get data from database
 // Not working yet cause no database
 import { create } from "zustand";
 
