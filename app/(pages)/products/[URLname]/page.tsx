@@ -7,6 +7,7 @@ import data from "@/app/data/products";
 import Image from 'next/image';
 import Catalogue from '@/app/components/products/catalogue';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import { useCartStore } from "@/app/store/useCartStore";
 
 export default function Product() {
     // Embla Carousel
@@ -66,6 +67,8 @@ export default function Product() {
         setQuantity(quantity+1)
     }
     // End of Quantity selector
+
+    const addToCart = useCartStore(state => state.addToCart)
 
     // Display product details
     const params = useParams();
@@ -154,9 +157,9 @@ export default function Product() {
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 w-full">
-                            <Link id={id} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                            <button onClick={() => addToCart(product)} id={id} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg">
                                 ADD TO CART
-                            </Link>
+                            </button>
                             <Link id={id} className="bg-beige rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
                                 BUY NOW
                             </Link>

@@ -1,18 +1,21 @@
 
-import Cart from "@/app/components/cart";
+import Cart from "@/app/components/cart/cart";
+import { useCartStore } from "@/app/store/useCartStore";
+import useFromStore from "@/app/hooks/useFromStore";
 
 export default function Drawer({
-    isDrawerOpen,
-    toggleDrawer,
-    showTotalItems,
-    closeAll,
+    setIsOpen,
 }:{
-    isDrawerOpen: boolean;
-    toggleDrawer: () => void;
-    showTotalItems: boolean;
-    closeAll: () => void;
+    setIsOpen: (isOpen: boolean) => void;
 }) {
-    
+
+    const isDrawerOpen = useFromStore(useCartStore, state => state.isDrawerOpen)
+    const toggleDrawer = useCartStore(state => state.toggleDrawer)
+
+    const closeAll = () => {
+        setIsOpen(false);
+        useCartStore.setState({isDrawerOpen: false});
+    };
     return (
         <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-40"
         style={{

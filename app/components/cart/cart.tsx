@@ -1,5 +1,5 @@
 import { useCartStore } from "@/app/store/useCartStore";
-import CartItem from "@/app/components/cart-item";
+import CartItem from "@/app/components/cart/cart-item";
 import useFromStore from "@/app/hooks/useFromStore"
 import Link from "next/link";
 
@@ -11,6 +11,11 @@ export default function Cart({
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const cart = useFromStore(useCartStore, state => state.cart)
     
+    // Checkout Testing
+    const Checkout = () =>{
+        window.alert(cart);
+    }
+
     let total = 0
     if (cart) {
         // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
@@ -47,7 +52,7 @@ export default function Cart({
                     <span className='text-xl font-bold'>${total.toFixed(2)}</span>
                 </div>
                 <div>
-                    <button className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
+                    <button onClick={Checkout} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
                         Check Out
                     </button>
                 </div>

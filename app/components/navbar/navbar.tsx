@@ -3,7 +3,7 @@ import { useState } from "react";
 import MobileNav from "@/app/components/navbar/mobilenav";
 import Logo from "@/app/components/navbar/logo";
 import Link from "next/link";
-import Drawer from "@/app/components/drawer";
+import Drawer from "@/app/components/cart/drawer";
 import { useCartStore } from "@/app/store/useCartStore";
 import useFromStore from "@/app/hooks/useFromStore";
 
@@ -13,16 +13,8 @@ export default function Navbar() {
         setIsOpen(!isOpen);
     };
     
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const toggleDrawer = () => {
-        setIsDrawerOpen(!isDrawerOpen);
-    };
-
-    const closeAll = () => {
-        setIsOpen(false);
-        setIsDrawerOpen(false);
-    };
-
+    const toggleDrawer = useCartStore(state => state.toggleDrawer)
+    
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const totalItems = useFromStore(useCartStore, state => state.totalItems)
 
@@ -31,7 +23,7 @@ export default function Navbar() {
     return (
         <>
         <MobileNav isOpen={isOpen} toggle={toggle} toggleDrawer={toggleDrawer} showTotalItems={showTotalItems} totalItems={totalItems}/>
-        <Drawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} showTotalItems={showTotalItems} closeAll={closeAll}/>
+        <Drawer setIsOpen={setIsOpen}/>
         <header className="bg-beige font-slate-900">
             <nav className="max-w-6xl mx-auto flex justify-between items-center p-5 md:p-6 lg:max-w-7xl">
                 <Logo />
