@@ -14,7 +14,8 @@ interface State {
 
 // Define the interface of the actions that can be performed in the Cart
 interface Actions {
- addToCart: (Item: Product) => void
+ addToCart: (Item: Product, quantity?: number) => void
+ reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
  toggleDrawer: () => void
  resetCart: () => void
@@ -36,33 +37,60 @@ export const useCartStore = create(
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
             isDrawerOpen: INITIAL_STATE.isDrawerOpen,
-            addToCart: (product: Product) => {
+            addToCart: (product: Product, quantity = 1) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
-
+                
                 // If the item already exists in the Cart, increase its quantity
                 if (cartItem) {
                     const updatedCart = cart.map(item =>
-                        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                        item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
                     )
                     set(state => ({
                         cart: updatedCart,
-                        totalItems: state.totalItems + 1,
-                        totalPrice: state.totalPrice + cartItem.price,
+                        totalItems: state.totalItems + quantity,
+                        totalPrice: state.totalPrice + (cartItem.price * quantity),
                         isDrawerOpen: true,
                     }))
                 } else {
-                    const updatedCart = [...cart, { ...product, quantity: 1 }]
+                    const updatedCart = [...cart, { ...product, quantity: quantity }]
 
                     set(state => ({
                         cart: updatedCart,
-                        totalItems: state.totalItems + 1,
-                        totalPrice: state.totalPrice + product.price,
+                        totalItems: state.totalItems + quantity,
+                        totalPrice: state.totalPrice + (product.price * quantity),
                         isDrawerOpen: true,
                     }))
                 }
             },
-            
+            reduceFromCart: (product: Product) => {
+                const cart = get().cart
+                const cartItem = cart.find(item => item.id === product.id)
+
+                // If the item quantity is 1, remove it from the Cart
+                if (cartItem) {
+                    if (cartItem.quantity === 1) {
+                        set(state => ({
+                            cart: state.cart.filter(item => item.id !== product.id),
+                            totalItems: state.totalItems - 1,
+                            totalPrice: state.totalPrice - product.price,
+                            isDrawerOpen: true,
+                        }))
+                    }
+                    // If the item quantity is more than 1, reduce its quantity
+                    else {
+                        const updatedCart = cart.map(item =>
+                            item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+                        )
+                        set(state => ({
+                            cart: updatedCart,
+                            totalItems: state.totalItems - 1,
+                            totalPrice: state.totalPrice - product.price,
+                            isDrawerOpen: true,
+                        }))
+                    }
+                }
+            },
             removeFromCart: (product: Product) => {
                 
                 const cart = get().cart

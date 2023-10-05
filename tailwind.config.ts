@@ -23,6 +23,7 @@ const config: Config = {
         'orange':'#f6a841',
       },
       borderRadius: {
+        'ml': '25px',
         'lg': '35px',
       },
     },

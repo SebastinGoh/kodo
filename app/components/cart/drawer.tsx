@@ -12,10 +12,6 @@ export default function Drawer({
     const isDrawerOpen = useFromStore(useCartStore, state => state.isDrawerOpen)
     const toggleDrawer = useCartStore(state => state.toggleDrawer)
 
-    const closeAll = () => {
-        setIsOpen(false);
-        useCartStore.setState({isDrawerOpen: false});
-    };
     return (
         <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-40"
         style={{
@@ -25,11 +21,7 @@ export default function Drawer({
         }}
         >
             <button className="flex-1" onClick={toggleDrawer}></button>
-            <div className="bg-orange rounded-t-lg shadow-lg h-content flex-initial">
-                <div className="flex">
-                    <Cart closeAll={closeAll}/>
-                </div>
-            </div>
+            <Cart setIsOpen={setIsOpen}/>
         </div>
         
     );

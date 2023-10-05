@@ -4,59 +4,70 @@ import useFromStore from "@/app/hooks/useFromStore"
 import Link from "next/link";
 
 export default function Cart({
-    closeAll,
+    setIsOpen,
 }:{
-    closeAll: () => void;
-})  {
+    setIsOpen: (isOpen: boolean) => void;
+}) {
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const cart = useFromStore(useCartStore, state => state.cart)
-    
+    const toggleDrawer = useCartStore(state => state.toggleDrawer)
     // Checkout Testing
     const Checkout = () =>{
         window.alert(cart);
     }
 
-    let total = 0
+    const closeAll = () => {
+        setIsOpen(false);
+        useCartStore.setState({isDrawerOpen: false});
+    };
+
+    let total = 0;
     if (cart) {
         // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
         total = cart.reduce((acc, product) => acc + product.price * (product.quantity as number), 0);
-    }
-    if (total === 0) {
-        return (
-            <section className="bg-orange rounded-t-lg w-full flex flex-col gap-4">
-                <div className='text-lg p-4'>
-                    Your Cart is empty
-                </div>
-                <div className="flex items-center justify-center p-4">
-                    <Link href="/products">
-                        <button onClick={closeAll} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
-                            Go to Products
-                        </button>
-                    </Link>
-                </div>
-            </section>
-        )
-    } else {
-        return (
-            <section className="bg-orange rounded-t-lg w-full flex flex-col gap-4">
-                <div className='text-lg p-4'>
-                    My Cart
-                </div>
-                <div className="bg-white rounded-lg m-2 p-2">
-                    {cart?.map(product => (
-                        <CartItem key={product.id} product={product} />
-                    ))}
-                </div>
-                <div className='flex justify-end items-center mt-4'>
-                    <span className='text-lg font-bold'>Total:</span>
-                    <span className='text-xl font-bold'>${total.toFixed(2)}</span>
-                </div>
-                <div>
-                    <button onClick={Checkout} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
-                        Check Out
+    };
+
+    const isTotalZero = total === 0;
+
+    return (
+        <section className="bg-orange rounded-t-ml text-lg w-full flex flex-col items-center justify-center gap-2 py-4">
+            <div className='text-lg w-full flex justify-between px-6'>
+                <span className='font-semibold'>
+                    {{isTotalZero} ? "Your Cart is Empty" : "My Cart"}
+                </span>
+                <button className="" onClick={toggleDrawer}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div className="flex flex-col gap-2">
+                {cart?.map(product => (
+                    <CartItem key={product.id} product={product} />
+                ))}
+                <Link className="w-full my-5" href="/products"
+                style={{
+                    opacity: `${isTotalZero ? "1" : "0"}`,
+                    display: ` ${isTotalZero ? "" : "none"}`,
+                }}
+                >
+                    <button onClick={closeAll} className="w-full bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink">
+                        Go to Products
                     </button>
-                </div>
-            </section>
-        )
-    }
-}
+                </Link>
+            </div>
+            <hr className="w-full border-beige" />
+            <div className='w-full flex justify-between px-4'>
+                <div className='text-sm'>Sub-Total</div>
+                <div className='text-xl font-bold'>${total.toFixed(2)}</div>
+            </div>
+            <div className="w-full px-4">
+                <button onClick={Checkout} className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}
+                disabled = {isTotalZero}
+                >
+                    Review Order
+                </button>
+            </div>
+        </section>
+    )
+};
