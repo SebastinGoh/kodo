@@ -39,3 +39,9 @@ Contact Us functionality (nodemailer)
 
 Shopping Cart & Storage (Zustand)
 - https://hackernoon.com/how-to-build-a-shopping-cart-with-nextjs-and-zustand-state-management-with-typescript
+
+Image Carousel for Product Details (Embla)
+- https://www.embla-carousel.com/
+
+Accordion for FAQ and Policies (Tailwind Elements)
+- https://tailwind-elements.com/docs/standard/components/accordion/
