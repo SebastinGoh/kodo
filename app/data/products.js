@@ -17,6 +17,7 @@ export default [
             "1 Plastic Sandbox Tray",
             "1 Plastic Sand Shovel"
         ],
+        quantity: 0,
     },
     {
         id: "2",
@@ -36,6 +37,7 @@ export default [
             "2 Plastic Sandbox Tray",
             "2 Plastic Sand Shovel"
         ],
+        quantity: 0,
     },
     {
         id: "3",
@@ -55,6 +57,7 @@ export default [
             "3 Plastic Sandbox Tray",
             "3 Plastic Sand Shovel"
         ],
+        quantity: 0,
     },
     {
         id: "4",
@@ -74,5 +77,6 @@ export default [
             "4 Plastic Sandbox Tray",
             "4 Plastic Sand Shovel"
         ],
+        quantity: 0,
     }
 ]

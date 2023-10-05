@@ -17,6 +17,7 @@ interface Actions {
  addToCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
  toggleDrawer: () => void
+ resetCart: () => void
 }
 
 // Initialize a default state
@@ -42,12 +43,12 @@ export const useCartStore = create(
                 // If the item already exists in the Cart, increase its quantity
                 if (cartItem) {
                     const updatedCart = cart.map(item =>
-                        item.id === product.id ? { ...item, quantity: (item.quantity as number) + 1 } : item
+                        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
                     )
                     set(state => ({
                         cart: updatedCart,
                         totalItems: state.totalItems + 1,
-                        totalPrice: state.totalPrice + product.price,
+                        totalPrice: state.totalPrice + cartItem.price,
                         isDrawerOpen: true,
                     }))
                 } else {
@@ -69,23 +70,22 @@ export const useCartStore = create(
                 if (cartItem) {
                     set(state => ({
                         cart: state.cart.filter(item => item.id !== product.id),
-                        totalItems: state.totalItems - 1,
-                        totalPrice: state.totalPrice - product.price,
+                        totalItems: state.totalItems - cartItem.quantity,
+                        totalPrice: state.totalPrice - (cartItem.quantity * cartItem.price),
                     }))
                 }
-                if (cart.length === 0) {
-                    set(() => ({
-                        cart: [],
-                        totalItems: 0,
-                        totalPrice: 0,
-                        isDrawerOpen: true,
-                    }))
-                }
-                
             },
             toggleDrawer: () => {
                 set(state => ({
                     isDrawerOpen: !state.isDrawerOpen,
+                }))
+            },
+            resetCart: () => {
+                set(() => ({
+                    cart: [],
+                    totalItems: 0,
+                    totalPrice: 0,
+                    isDrawerOpen: false,
                 }))
             }
         }),

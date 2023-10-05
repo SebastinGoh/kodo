@@ -6,5 +6,5 @@ export interface Product {
     price: number
     images: string[]
     included: string[]
-    quantity?: number
+    quantity: number
 }
