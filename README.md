@@ -45,3 +45,6 @@ Image Carousel for Product Details (Embla)
 
 Accordion for FAQ and Policies (Tailwind Elements)
 - https://tailwind-elements.com/docs/standard/components/accordion/
+
+Form Logic for Contact Us and User & Shipping Info (React-Hook-Form)
+- https://react-hook-form.com/
