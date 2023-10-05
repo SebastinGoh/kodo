@@ -14,7 +14,7 @@ interface State {
 
 // Define the interface of the actions that can be performed in the Cart
 interface Actions {
- addToCart: (Item: Product, quantity?: number) => void
+ addToCart: (Item: Product, quantity?: number, openDrawer?: boolean) => void
  reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
  toggleDrawer: () => void
@@ -37,7 +37,7 @@ export const useCartStore = create(
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
             isDrawerOpen: INITIAL_STATE.isDrawerOpen,
-            addToCart: (product: Product, quantity = 1) => {
+            addToCart: (product: Product, quantity = 1, openDrawer = false) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
                 
@@ -50,7 +50,6 @@ export const useCartStore = create(
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
                         totalPrice: state.totalPrice + (cartItem.price * quantity),
-                        isDrawerOpen: true,
                     }))
                 } else {
                     const updatedCart = [...cart, { ...product, quantity: quantity }]
@@ -59,9 +58,9 @@ export const useCartStore = create(
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
                         totalPrice: state.totalPrice + (product.price * quantity),
-                        isDrawerOpen: true,
                     }))
                 }
+                if (openDrawer) set(state => ({ isDrawerOpen: true }));
             },
             reduceFromCart: (product: Product) => {
                 const cart = get().cart
@@ -74,7 +73,6 @@ export const useCartStore = create(
                             cart: state.cart.filter(item => item.id !== product.id),
                             totalItems: state.totalItems - 1,
                             totalPrice: state.totalPrice - product.price,
-                            isDrawerOpen: true,
                         }))
                     }
                     // If the item quantity is more than 1, reduce its quantity
@@ -86,7 +84,6 @@ export const useCartStore = create(
                             cart: updatedCart,
                             totalItems: state.totalItems - 1,
                             totalPrice: state.totalPrice - product.price,
-                            isDrawerOpen: true,
                         }))
                     }
                 }

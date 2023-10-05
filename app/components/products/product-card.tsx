@@ -27,7 +27,7 @@ export default function ProductCard({ product } : Props) {
                 <p className="mb-8 text-slate-900">
                     {product.description}
                 </p>
-                <button onClick={() => addToCart(product)} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
+                <button onClick={() => addToCart(product, 1, true)} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
                     ADD TO CART
                 </button>
             </div>

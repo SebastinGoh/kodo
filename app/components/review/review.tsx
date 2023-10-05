@@ -1,21 +1,11 @@
 import { useCartStore } from "@/app/store/useCartStore";
-import CartItem from "@/app/components/cart/cart-item";
+import ReviewItem from "@/app/components/review/review-item";
 import useFromStore from "@/app/hooks/useFromStore"
 import Link from "next/link";
 
-export default function Cart({
-    setIsOpen,
-}:{
-    setIsOpen: (isOpen: boolean) => void;
-}) {
+export default function Review() {
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const cart = useFromStore(useCartStore, state => state.cart)
-    const toggleDrawer = useCartStore(state => state.toggleDrawer)
-
-    const closeAll = () => {
-        setIsOpen(false);
-        useCartStore.setState({isDrawerOpen: false});
-    };
 
     let total = 0;
     if (cart) {
@@ -23,33 +13,27 @@ export default function Cart({
         total = cart.reduce((acc, product) => acc + product.price * (product.quantity as number), 0);
     };
 
-    const isTotalZero = total === 0;
+    const isTotalZero = (total === 0);
 
     return (
-        <section className="bg-orange rounded-t-ml text-lg w-full flex flex-col items-center justify-center gap-2 py-4">
+        <section className="bg-blue text-lg w-full flex flex-col items-center justify-center gap-6 py-4">
             <div className='text-lg w-full flex justify-between px-6'>
                 <span className='font-semibold'>
                     {isTotalZero ? "Your Cart is Empty" : "My Cart"}
                 </span>
-                <button className="" onClick={toggleDrawer}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
             </div>
+            <hr className="w-full border-beige" />
             <div className="flex flex-col gap-2">
                 {cart?.map(product => (
-                    <CartItem key={product.id} product={product} />
+                    <ReviewItem key={product.id} product={product} />
                 ))}
-                <Link className="w-full my-5" href="/products"
+                <Link className="w-full bg-beige rounded-full font-bold py-2 px-8 my-5 hover:bg-pink" href="/products"
                 style={{
                     opacity: `${isTotalZero ? "1" : "0"}`,
                     display: ` ${isTotalZero ? "" : "none"}`,
                 }}
                 >
-                    <button onClick={closeAll} className="w-full bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink">
-                        Go to Products
-                    </button>
+                    Go to Products
                 </Link>
             </div>
             <hr className="w-full border-beige" />
@@ -57,11 +41,19 @@ export default function Cart({
                 <div className='text-sm'>Sub-Total</div>
                 <div className='text-xl font-bold'>${total.toFixed(2)}</div>
             </div>
-            <button onClick={closeAll} className="w-full px-4">
-                <Link href="/review" className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
-                    Review Order
+            <div className="w-full px-4">
+                <button onClick={() => window.alert("Checking Out")} className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+                    Checkout
+                </button>
+                {/* <Link href="/checkout" className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+                    Checkout
+                </Link> */}
+            </div>
+            <div>
+                <Link href="/products" className="underline">
+                    Continue shopping
                 </Link>
-            </button>
+            </div>
         </section>
     )
 };
