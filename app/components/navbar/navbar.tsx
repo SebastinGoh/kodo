@@ -38,6 +38,9 @@ export default function Navbar() {
                 </Link>
             </nav>
         </header>
+        <div className="bg-beige rounded-full shadow-lg fixed bottom-8 right-8 z-30 p-4 md:hidden">
+            <CartIcon />
+        </div>
         </>
         
     )

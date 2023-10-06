@@ -38,9 +38,6 @@ export default function MobileNav({
                 <li>
                     <Link href="/faq" onClick={toggle}><p>FAQ</p></Link>
                 </li>
-                <li className="flex justify-center">
-                    <CartIcon />
-                </li>
             </ul>
         </div>
     );
