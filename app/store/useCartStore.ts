@@ -34,7 +34,7 @@ export const useCartStore = create(
             cart: INITIAL_STATE.cart,
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
-            addToCart: (product: Product, quantity = 1, openCart = true) => {
+            addToCart: (product: Product, quantity = 1, openCart = false) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
                 
@@ -58,6 +58,7 @@ export const useCartStore = create(
                     }))
                 }
 
+                // If adding item from product catalouge or product details, open the Cart
                 if (openCart) {
                     const toggleCart = useOverlayStore.getState().toggleCart;
                     toggleCart();
