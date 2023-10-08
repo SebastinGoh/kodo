@@ -1,21 +1,17 @@
 import { useCartStore } from "@/app/store/useCartStore";
+import { useOverlayStore } from "@/app/store/useOverlayStore";
+import useFromStore from "@/app/hooks/useFromStore";
 import CartItem from "@/app/components/cart/cart-item";
-import useFromStore from "@/app/hooks/useFromStore"
 import Link from "next/link";
 
-export default function Cart({
-    setIsOpen,
-}:{
-    setIsOpen: (isOpen: boolean) => void;
-}) {
+export default function Cart() {
+    
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const cart = useFromStore(useCartStore, state => state.cart)
-    const toggleDrawer = useCartStore(state => state.toggleDrawer)
-
-    const closeAll = () => {
-        setIsOpen(false);
-        useCartStore.setState({isDrawerOpen: false});
-    };
+    
+    const toggleCart = useOverlayStore(state => state.toggleCart)
+    const toggleReview = useOverlayStore(state => state.toggleReview)
+    const setOverlays = useOverlayStore(state => state.setOverlays)
 
     let total = 0;
     if (cart) {
@@ -31,7 +27,7 @@ export default function Cart({
                 <span className='font-semibold'>
                     {isTotalZero ? "Your Cart is Empty" : "My Cart"}
                 </span>
-                <button className="" onClick={toggleDrawer}>
+                <button className="" onClick={toggleCart}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -47,7 +43,7 @@ export default function Cart({
                     display: ` ${isTotalZero ? "" : "none"}`,
                 }}
                 >
-                    <button onClick={closeAll} className="w-full bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink">
+                    <button onClick={() => setOverlays()} className="w-full bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink">
                         Go to Products
                     </button>
                 </Link>
@@ -57,10 +53,8 @@ export default function Cart({
                 <div className='text-sm'>Sub-Total</div>
                 <div className='text-xl font-bold'>${total.toFixed(2)}</div>
             </div>
-            <button onClick={closeAll} className="w-full px-4">
-                <Link href="/review" className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
-                    Review Order
-                </Link>
+            <button onClick={toggleReview} disabled={isTotalZero} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+                Review Order
             </button>
         </section>
     )

@@ -1,6 +1,8 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import Overlays from '@/app/components/overlays';
 import Navbar from '@/app/components/navbar/navbar';
 import Footer from "@/app/components/footer";
 
@@ -19,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className='scroll-smooth'>
       <body className={inter.className + " h-screen text-slate-900"}>
+        <Overlays />
         <Navbar />
         {children}
         <Footer />

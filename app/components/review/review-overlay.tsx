@@ -1,18 +1,18 @@
 
 import Review from "@/app/components/review/review";
-import { useCartStore } from "@/app/store/useCartStore";
-import useFromStore from "@/app/hooks/useFromStore";
+import { useOverlayStore } from "@/app/store/useOverlayStore";
+
 
 export default function ReviewOverlay() {
 
-    const isDrawerOpen = useFromStore(useCartStore, state => state.isDrawerOpen)
-
+    const isReviewOpen = useOverlayStore(state => state.isReviewOpen)
+    
     return (
-        <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-40"
+        <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-50"
         style={{
-            opacity: `${isDrawerOpen ? "1" : "0"}`,
-            top: ` ${isDrawerOpen ? "0" : "-100%"}`,
-            display: ` ${isDrawerOpen ? "" : "none"}`,
+            opacity: `${isReviewOpen ? "1" : "0"}`,
+            bottom: ` ${isReviewOpen ? "0" : "-100%"}`,
+            display: ` ${isReviewOpen ? "" : "none"}`,
         }}
         >
             <Review />

@@ -1,11 +1,15 @@
-import { useCartStore } from "@/app/store/useCartStore";
-import ReviewItem from "@/app/components/review/review-item";
 import useFromStore from "@/app/hooks/useFromStore"
+import { useCartStore } from "@/app/store/useCartStore";
+import { useOverlayStore } from "@/app/store/useOverlayStore";
+import ReviewItem from "@/app/components/review/review-item";
 import Link from "next/link";
 
 export default function Review() {
     // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
     const cart = useFromStore(useCartStore, state => state.cart)
+    
+    const toggleReview = useOverlayStore(state => state.toggleReview)
+    const setOverlays = useOverlayStore(state => state.setOverlays)
 
     let total = 0;
     if (cart) {
@@ -16,11 +20,18 @@ export default function Review() {
     const isTotalZero = (total === 0);
 
     return (
-        <section className="bg-blue text-lg w-full flex flex-col items-center justify-center gap-6 py-4">
-            <div className='text-lg w-full flex justify-between px-6'>
-                <span className='font-semibold'>
-                    {isTotalZero ? "Your Cart is Empty" : "My Cart"}
-                </span>
+        <section className="bg-blue text-lg w-full h-full flex flex-col items-center justify-center gap-6 py-4">
+            <div className="w-full flex justify-between px-6">
+                <div className='text-lg w-full flex justify-between'>
+                    <span className='font-semibold'>
+                        {isTotalZero ? "Your Cart is Empty" : "Review Your Cart"}
+                    </span>
+                </div>
+                <button className="" onClick={toggleReview}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
             <hr className="w-full border-beige" />
             <div className="flex flex-col gap-2">
@@ -45,14 +56,11 @@ export default function Review() {
                 <button onClick={() => window.alert("Checking Out")} className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
                     Checkout
                 </button>
-                {/* <Link href="/checkout" className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
-                    Checkout
-                </Link> */}
             </div>
             <div>
-                <Link href="/products" className="underline">
+                <a href="#" onClick={() => setOverlays()} className="underline">
                     Continue shopping
-                </Link>
+                </a>
             </div>
         </section>
     )
