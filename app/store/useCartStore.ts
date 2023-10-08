@@ -14,7 +14,7 @@ interface State {
 
 // Define the interface of the actions that can be performed in the Cart
 interface Actions {
- addToCart: (Item: Product, quantity?: number, openDrawer?: boolean) => void
+ addToCart: (Item: Product, quantity?: number, openCart?: boolean) => void
  reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
  resetCart: () => void
@@ -34,7 +34,7 @@ export const useCartStore = create(
             cart: INITIAL_STATE.cart,
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
-            addToCart: (product: Product, quantity = 1, openDrawer = false) => {
+            addToCart: (product: Product, quantity = 1, openCart = true) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
                 
@@ -56,6 +56,11 @@ export const useCartStore = create(
                         totalItems: state.totalItems + quantity,
                         totalPrice: state.totalPrice + (product.price * quantity),
                     }))
+                }
+
+                if (openCart) {
+                    const toggleCart = useOverlayStore.getState().toggleCart;
+                    toggleCart();
                 }
             },
             reduceFromCart: (product: Product) => {
