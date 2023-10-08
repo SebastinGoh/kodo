@@ -4,13 +4,20 @@ import Link from "next/link";
 import Image from 'next/image';
 import { useCartStore } from "@/app/store/useCartStore";
 import { Product } from "@/app/types.d";
-
+import { useOverlayStore } from "@/app/store/useOverlayStore";
+    
 interface Props {
 	product: Product
 }
 
 export default function ProductCard({ product } : Props) {
+
     const addToCart = useCartStore(state => state.addToCart)
+    const toggleCart = useOverlayStore(state => state.toggleCart)
+    function handleClick() {
+        toggleCart()
+        addToCart(product, 1, true)
+    }
 
     return (
         <div key={product.id} className="max-w-xs border bg-white rounded-lg pb-4 flex-none shadow">
@@ -27,7 +34,7 @@ export default function ProductCard({ product } : Props) {
                 <p className="mb-8 text-slate-900">
                     {product.description}
                 </p>
-                <button onClick={() => addToCart(product, 1, true)} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
+                <button onClick={handleClick} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
                     ADD TO CART
                 </button>
             </div>

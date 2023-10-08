@@ -9,8 +9,6 @@ interface State {
  cart: Product[]
  totalItems: number
  totalPrice: number
- isDrawerOpen: boolean
- isOverlayOpen: boolean
 }
 
 // Define the interface of the actions that can be performed in the Cart
@@ -18,9 +16,7 @@ interface Actions {
  addToCart: (Item: Product, quantity?: number, openDrawer?: boolean) => void
  reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
- toggleDrawer: () => void
  resetCart: () => void
- toggleOverlay: () => void
 }
 
 // Initialize a default state
@@ -28,8 +24,6 @@ const INITIAL_STATE: State = {
  cart: [],
  totalItems: 0,
  totalPrice: 0,
- isDrawerOpen: false,
- isOverlayOpen: false,
 }
 
 // Create the store with Zustand, combining the status interface and actions
@@ -39,8 +33,6 @@ export const useCartStore = create(
             cart: INITIAL_STATE.cart,
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
-            isDrawerOpen: INITIAL_STATE.isDrawerOpen,
-            isOverlayOpen: INITIAL_STATE.isOverlayOpen,
             addToCart: (product: Product, quantity = 1, openDrawer = false) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
@@ -64,7 +56,6 @@ export const useCartStore = create(
                         totalPrice: state.totalPrice + (product.price * quantity),
                     }))
                 }
-                if (openDrawer) set(state => ({ isDrawerOpen: true }));
             },
             reduceFromCart: (product: Product) => {
                 const cart = get().cart
@@ -104,22 +95,12 @@ export const useCartStore = create(
                     }))
                 }
             },
-            toggleDrawer: () => {
-                set(state => ({
-                    isDrawerOpen: !state.isDrawerOpen,
-                }))
-            },
             resetCart: () => {
                 set(() => ({
                     cart: [],
                     totalItems: 0,
                     totalPrice: 0,
                     isDrawerOpen: false,
-                }))
-            },
-            toggleOverlay: () => {
-                set(state => ({
-                    isOverlayOpen: !state.isOverlayOpen,
                 }))
             },
         }),
