@@ -7,7 +7,7 @@ export default function CartOverlay() {
     const toggleCart = useOverlayStore(state => state.toggleCart)
 
     return (
-        <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-40"
+        <div className="fixed w-screen h-screen overflow-hidden bg-slate-900/50 flex flex-col z-20"
         style={{
             opacity: `${isCartOpen ? "1" : "0"}`,
             bottom: ` ${isCartOpen ? "0" : "-100%"}`,

@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { Product } from "@/app/types";
+import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 // Define the interface of the Cart state
 interface State {
@@ -64,11 +65,8 @@ export const useCartStore = create(
                 // If the item quantity is 1, remove it from the Cart
                 if (cartItem) {
                     if (cartItem.quantity === 1) {
-                        set(state => ({
-                            cart: state.cart.filter(item => item.id !== product.id),
-                            totalItems: state.totalItems - 1,
-                            totalPrice: state.totalPrice - product.price,
-                        }))
+                        const openModal = useOverlayStore.getState().openModal;
+                        openModal(cartItem);
                     }
                     // If the item quantity is more than 1, reduce its quantity
                     else {
@@ -90,9 +88,9 @@ export const useCartStore = create(
                 if (cartItem) {
                     set(state => ({
                         cart: state.cart.filter(item => item.id !== product.id),
-                        totalItems: state.totalItems - cartItem.quantity,
-                        totalPrice: state.totalPrice - (cartItem.quantity * cartItem.price),
-                    }))
+                        totalItems: state.totalItems - 1,
+                        totalPrice: state.totalPrice - product.price,
+                    }));
                 }
             },
             resetCart: () => {
