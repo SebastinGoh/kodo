@@ -64,7 +64,9 @@ export default function Product() {
     }
     
     function addQuantity() {
-        setQuantity(quantity+1)
+        if (quantity < 10) {
+            setQuantity(quantity+1)
+        }
     }
     // End of Quantity selector
 
