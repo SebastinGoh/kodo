@@ -53,9 +53,11 @@ export default function Cart() {
                 <div className='text-sm'>Sub-Total</div>
                 <div className='text-xl font-bold'>${total.toFixed(2)}</div>
             </div>
-            <button onClick={toggleReview} disabled={isTotalZero} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
-                Review Order
-            </button>
+            <div className="w-full px-4">
+                <button onClick={toggleReview} disabled={isTotalZero} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+                    Review Order
+                </button>
+            </div>
         </section>
     )
 };

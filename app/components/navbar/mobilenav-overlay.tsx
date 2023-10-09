@@ -9,7 +9,7 @@ export default function MobileNav() {
     const toggleMobileNav = useOverlayStore(state => state.toggleMobileNav)
 
     return (
-        <div className="fixed w-screen h-screen overflow-hidden bg-beige flex content-center justify-center z-10"
+        <div className="fixed inset-0 bg-beige flex content-center justify-center z-10"
         style={{
             opacity: `${isMobileNavOpen ? "1" : "0"}`,
             top: ` ${isMobileNavOpen ? "0" : "-100%"}`,
