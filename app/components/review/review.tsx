@@ -47,10 +47,10 @@ export default function Review() {
                 <div className='text-sm'>Sub-Total</div>
                 <div className='text-xl font-bold'>${totalPrice ? totalPrice.toFixed(2) : "0.00"}</div>
             </div>
-            <div className="w-full px-4">
-                <button onClick={() => window.alert("Checking Out")} className={`w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg ${!totalItems ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+            <div className="w-full px-4 flex">
+                <Link href="/delivery" className="grow text-center w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg">
                     Checkout
-                </button>
+                </Link>
             </div>
             <div>
                 <a href="#" onClick={() => setOverlays()} className="underline">
