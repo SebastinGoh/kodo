@@ -159,12 +159,12 @@ export default function Product() {
                             </div>
                         </div>
                         <div className="flex flex-col gap-4 w-full">
-                            <button onClick={() => addToCart(product, quantity, true)} id={id} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg">
+                            <button onClick={() => addToCart(product, quantity, true)} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg">
                                 ADD TO CART
                             </button>
-                            <Link id={id} className="bg-beige rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                            <button onClick={() => addToCart(product, quantity, false, true)} className="bg-beige rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg">
                                 BUY NOW
-                            </Link>
+                            </button>
                         </div>
                         <div className="flex flex-col gap-6 text-start">
                             <div className="">

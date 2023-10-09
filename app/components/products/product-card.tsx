@@ -18,17 +18,20 @@ export default function ProductCard({ product } : Props) {
             <Link href={`/products/${product.URLname}`} className="w-full h-80 overflow-hidden">
                 <Image className="rounded-t-lg" src={`/product/${product.images[0]}`} width={350} height={100} alt={product.name} />
             </Link>
-            <div className="p-5">
+            <div className="flex flex-col gap-4 px-4 py-2">
                 <Link href={`/products/${product.URLname}`} className="hover:underline">
                     <h5 className="text-2xl font-bold text-slate-900">{product.name}</h5>
                 </Link>
-                <p className="mb-2 text-slate-800">
+                <p className="text-slate-800">
                     - SGD ${product.price}
                 </p>
-                <p className="mb-8 text-slate-900">
+                <p className="text-slate-900">
                     {product.description}
                 </p>
-                <button onClick={() => addToCart(product,1,true)} className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg">
+                <Link href={`/products/${product.URLname}`} className="border-2 border-slate-900 rounded-full font-bold w-full h-12 flex items-center justify-center py-2 px-8 hover:bg-pink lg:text-lg">
+                    MORE DETAILS
+                </Link>
+                <button onClick={() => addToCart(product,1,true)} className="bg-beige rounded-full font-bold w-full h-12 py-2 px-8 hover:bg-pink lg:text-lg">
                     ADD TO CART
                 </button>
             </div>
