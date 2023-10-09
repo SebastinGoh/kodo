@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Catalogue from '@/app/components/products/catalogue';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import { useCartStore } from "@/app/store/useCartStore";
+import PageTitle from '@/app/components/page-title';
 
 export default function Product() {
     // Embla Carousel
@@ -136,8 +137,7 @@ export default function Product() {
                     </div>
                     {/* End of Embla Carousel */}
                     <div className="max-w-6xl mx-auto flex flex-col items-center justify-center gap-8 text-center p-6">
-                        
-                        <h5 className="text-2xl font-bold">{name}</h5>
+                        <PageTitle title={name}/>
                         <p className="text-lg">
                             SGD${price} per set
                         </p>

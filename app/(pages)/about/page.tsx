@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Catalogue from "@/app/components/products/catalogue";
+import PageTitle from "@/app/components/page-title";
 
 export default function About() {
   const video = "/hero_video_S.mp4";
   return (
     <main className='bg-pink'>
       <div className="w-full flex flex-col items-center justify-center text-center py-6">
-        <div className="text-2xl">
-          About Us
-        </div>
+        <PageTitle title="About Us"/>
       </div>
       <div className="bg-blue w-full flex justify-center py-14">
           <div className="max-w-4xl flex flex-wrap justify-center items-center gap-10 md:flex-nowrap">

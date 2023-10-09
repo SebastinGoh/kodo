@@ -1,15 +1,14 @@
 import Catalogue from "@/app/components/products/catalogue";
 import ContactForm from '@/app/(pages)/contact/contact-form';
 import Link from "next/link";
+import PageTitle from "@/app/components/page-title";
 
 export default function ContactPage() {
     
     return (
     <main className='bg-green text-slate-900'>
       <div className="w-full flex flex-col items-center justify-center text-center gap-8 p-4">
-        <div className="text-2xl">
-          Contact Us
-        </div>
+        <PageTitle title="Contact Us"/>
         <div className="text-md text-left">
           <p>
             If you have any questions or simply want to chat, we'd love to hear from you! 
