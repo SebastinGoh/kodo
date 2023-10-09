@@ -100,8 +100,8 @@ export const useCartStore = create(
                 if (cartItem) {
                     set(state => ({
                         cart: state.cart.filter(item => item.id !== product.id),
-                        totalItems: state.totalItems - 1,
-                        totalPrice: state.totalPrice - product.price,
+                        totalItems: state.totalItems - cartItem.quantity,
+                        totalPrice: state.totalPrice - (cartItem.price * cartItem.quantity),
                     }));
                 }
             },
