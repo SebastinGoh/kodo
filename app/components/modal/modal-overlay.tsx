@@ -7,12 +7,7 @@ export default function ModalOverlay() {
     const closeModal = useOverlayStore(state => state.closeModal)
     
     return (
-        <div className="fixed inset-0 bg-slate-900/50 flex flex-col z-40"
-        style={{
-            opacity: `${isModalOpen ? "1" : "0"}`,
-            display: ` ${isModalOpen ? "" : "none"}`,
-        }}
-        >
+        <div className={`inset-0 bg-slate-900/50 flex flex-col z-40 ${isModalOpen ? "fixed opacity-100 bottom-0" : "hidden opacity-0 -bottom-100"}`}>
             <button className="flex-1" onClick={closeModal}></button>
             <Modal />
             <button className="flex-1" onClick={closeModal}></button>

@@ -13,11 +13,12 @@ export default function Overlays() {
     const isMobileNavOpen = useOverlayStore(state => state.isMobileNavOpen)
     const isModalOpen = useOverlayStore(state => state.isModalOpen)
     
+    console.log(isMobileNavOpen)
     useEffect(() => {
         if (isReviewOpen || isCartOpen || isMobileNavOpen || isModalOpen ) {
-            document.body.className = "overflow-hidden"
+            document.body.classList.add("overflow-hidden");
         } else {
-            document.body.className = ""
+            document.body.classList.remove("overflow-hidden");
         }
     }, [isReviewOpen, isCartOpen, isMobileNavOpen, isModalOpen])
 
