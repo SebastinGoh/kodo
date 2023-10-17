@@ -11,6 +11,7 @@ export default function Review() {
     const totalItems = useFromStore(useCartStore, state => state.totalItems)
     
     const toggleReview = useOverlayStore(state => state.toggleReview)
+    const toggleCheckout = useOverlayStore(state => state.toggleCheckout)
     const setOverlays = useOverlayStore(state => state.setOverlays)
 
     return (
@@ -48,9 +49,9 @@ export default function Review() {
                 <div className='text-xl font-bold'>${totalPrice ? totalPrice.toFixed(2) : "0.00"}</div>
             </div>
             <div className="w-full px-4 flex">
-                <Link href="/delivery" className="grow text-center w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg">
+                <button onClick={toggleCheckout} className="grow text-center w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg">
                     Checkout
-                </Link>
+                </button>
             </div>
             <div>
                 <a href="#" onClick={() => setOverlays()} className="underline">

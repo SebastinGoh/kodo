@@ -48,3 +48,6 @@ Accordion for FAQ and Policies (Tailwind Elements)
 
 Form Logic for Contact Us and User & Shipping Info (React-Hook-Form)
 - https://react-hook-form.com/
+
+Google API Places Logic
+- https://www.99darshan.com/posts/interactive-maps-using-nextjs-and-google-maps
