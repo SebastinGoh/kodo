@@ -1,15 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Product } from "@/app/types";
+import { Product, Overlays } from "@/app/types";
 
 interface State {
-    isMobileNavOpen: boolean
-    isCartOpen: boolean
-    isReviewOpen: boolean
-    isModalOpen: boolean
-    isCheckoutOpen: boolean
     modalProduct: Product | null
+    Overlays: Overlays
 }
 
 interface Actions {
@@ -26,57 +22,70 @@ interface Actions {
         modal?: boolean,
         checkout?: boolean
     ) => void
+    getOverlayState: () => State
 }
 
 const INITIAL_STATE: State = {
-    isMobileNavOpen: false,
-    isCartOpen: false,
-    isReviewOpen: false,
-    isModalOpen: false,
-    isCheckoutOpen: false,
+    Overlays: {
+        isMobileNavOpen: false,
+        isCartOpen: false,
+        isReviewOpen: false,
+        isModalOpen: false,
+        isCheckoutOpen: false,
+    },
     modalProduct: null,
 }
 
 export const useOverlayStore = create(
     persist<State & Actions>(
         (set, get) => ({
-            isMobileNavOpen: INITIAL_STATE.isMobileNavOpen,
-            isCartOpen: INITIAL_STATE.isCartOpen,
-            isReviewOpen: INITIAL_STATE.isReviewOpen,
-            isModalOpen: INITIAL_STATE.isModalOpen,
-            isCheckoutOpen: INITIAL_STATE.isCheckoutOpen,
+            Overlays: INITIAL_STATE.Overlays,
             modalProduct: INITIAL_STATE.modalProduct,
 
             // Toggle overlays
-            toggleMobileNav: () => set(state => ({ isMobileNavOpen: !state.isMobileNavOpen })),
-            toggleCart: () => set(state => ({ isCartOpen: !state.isCartOpen })),
-            toggleReview: () => set(state => ({ isReviewOpen: !state.isReviewOpen })),
-            toggleCheckout: () => set(state => ({ isCheckoutOpen: !state.isCheckoutOpen })),
+            toggleMobileNav: () => set({ Overlays: { ...get().Overlays, isMobileNavOpen: !get().Overlays.isMobileNavOpen } }),
+            toggleCart: () => set({ Overlays: { ...get().Overlays, isCartOpen: !get().Overlays.isCartOpen } }),
+            toggleReview: () => set({ Overlays: { ...get().Overlays, isReviewOpen: !get().Overlays.isReviewOpen } }),
+            toggleCheckout: () => set({ Overlays: { ...get().Overlays, isCheckoutOpen: !get().Overlays.isCheckoutOpen } }),
 
             // Open and close modal
             openModal: (product: Product) => {
-                set(state => ({
-                    isModalOpen: true,
-                }))
-                set(state => ({modalProduct: product}))
+                set((state: State) => ({
+                    ...state,
+                    Overlays: {
+                      ...state.Overlays,
+                      ...{ isModalOpen: true },
+                    },
+                    modalProduct: product
+                }));
             },
             closeModal: () => {
-                set(state => ({ 
-                    modalProduct: null,
-                    isModalOpen: false 
-                }))
+                set((state: State) => ({
+                    ...state,
+                    Overlays: {
+                        ...state.Overlays,
+                        ...{ isModalOpen: false },
+                    },
+                    modalProduct: null
+                }));
             },
 
             // Close multiple overlays
             setOverlays: (mobileNav = false, cart = false, review = false, modal = false, checkout = false) => {
-                set(state => ({
-                    isMobileNavOpen: mobileNav,
-                    isCartOpen: cart,
-                    isReviewOpen: review,
-                    isModalOpen: modal,
-                    isCheckoutOpen: checkout,
-                }))
+                set((state: State) => ({
+                    ...state,
+                    Overlays: {
+                      isMobileNavOpen: mobileNav,
+                      isCartOpen: cart,
+                      isReviewOpen: review,
+                      isModalOpen: modal,
+                      isCheckoutOpen: checkout,
+                    },
+                }));
             },
+
+            // Get overlays state
+            getOverlayState: () => get(),
         }),
         {
             name: "overlay-store",

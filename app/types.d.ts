@@ -8,3 +8,11 @@ export interface Product {
     included: string[]
     quantity: number
 }
+
+export interface Overlays {
+    isMobileNavOpen: boolean
+    isCartOpen: boolean
+    isReviewOpen: boolean
+    isModalOpen: boolean
+    isCheckoutOpen: boolean
+}

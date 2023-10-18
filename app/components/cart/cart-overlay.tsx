@@ -3,7 +3,7 @@ import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 export default function CartOverlay() {
     
-    const isCartOpen = useOverlayStore(state => state.isCartOpen)
+    const isCartOpen = useOverlayStore(state => state.Overlays.isCartOpen)
     const toggleCart = useOverlayStore(state => state.toggleCart)
 
     return (
