@@ -3,7 +3,7 @@ import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 export default function ModalOverlay() {
 
-    const isModalOpen = useOverlayStore(state => state.isModalOpen)
+    const isModalOpen = useOverlayStore(state => state.Overlays.isModalOpen)
     const closeModal = useOverlayStore(state => state.closeModal)
     
     return (

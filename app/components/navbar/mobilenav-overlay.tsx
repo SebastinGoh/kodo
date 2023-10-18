@@ -5,7 +5,7 @@ import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 export default function MobileNav() {
     
-    const isMobileNavOpen = useOverlayStore(state => state.isMobileNavOpen)
+    const isMobileNavOpen = useOverlayStore(state => state.Overlays.isMobileNavOpen)
     const toggleMobileNav = useOverlayStore(state => state.toggleMobileNav)
 
     return (

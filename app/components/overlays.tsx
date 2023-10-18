@@ -9,19 +9,15 @@ import ModalOverlay from "@/app/components/modal/modal-overlay";
 import { useOverlayStore } from '@/app/store/useOverlayStore';
 
 export default function Overlays() {
-    const isReviewOpen = useOverlayStore(state => state.isReviewOpen)
-    const isCartOpen = useOverlayStore(state => state.isCartOpen)
-    const isMobileNavOpen = useOverlayStore(state => state.isMobileNavOpen)
-    const isModalOpen = useOverlayStore(state => state.isModalOpen)
-    const isCheckoutOpen = useOverlayStore(state => state.isCheckoutOpen)
-
+    const Overlays = useOverlayStore(state => state.Overlays);
+    
     useEffect(() => {
-        if (isReviewOpen || isCartOpen || isMobileNavOpen || isCheckoutOpen || isModalOpen ) {
-            document.body.classList.add("overflow-hidden");
+        if (Overlays.isCartOpen || Overlays.isCheckoutOpen || Overlays.isReviewOpen || Overlays.isModalOpen || Overlays.isMobileNavOpen) {
+            document.body.classList.add('overflow-hidden');
         } else {
-            document.body.classList.remove("overflow-hidden");
+            document.body.classList.remove('overflow-hidden');
         }
-    }, [isReviewOpen, isCartOpen, isMobileNavOpen, isCheckoutOpen, isModalOpen])
+    }, [Overlays]);
 
     return (
         <>
