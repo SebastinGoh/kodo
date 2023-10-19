@@ -16,3 +16,19 @@ export interface Overlays {
     isModalOpen: boolean
     isCheckoutOpen: boolean
 }
+
+export interface Screens {
+    isDeliveryScreenOpen: boolean
+    isPaymentScreenOpen: boolean
+    isConfirmationScreenOpen: boolean
+}
+
+export type OrderData = {
+    firstname: string;
+    lastname: string;
+    email: string;
+    address: string;
+    block: string;
+    postalcode: number;
+    remarks: string;
+}

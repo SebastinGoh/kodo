@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Product, Overlays } from "@/app/types";
+import { Product, Overlays, Screens } from "@/app/types";
 
 interface State {
     modalProduct: Product | null

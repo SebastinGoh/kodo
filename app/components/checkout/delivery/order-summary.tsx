@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import useFromStore from "@/app/hooks/useFromStore"
 import { useCartStore } from "@/app/store/useCartStore";
-import CheckoutItem from "@/app/components/checkout/checkout-item";
+import CheckoutItem from "@/app/components/checkout/delivery/checkout-item";
 
 const OrderSummaryAccordion = () => {
     useEffect(() => {
