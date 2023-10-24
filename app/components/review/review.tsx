@@ -14,6 +14,8 @@ export default function Review() {
     const toggleCheckout = useOverlayStore(state => state.toggleCheckout)
     const setOverlays = useOverlayStore(state => state.setOverlays)
 
+    const isTotalZero = totalPrice === 0.00;
+
     return (
         <section className="bg-blue text-lg w-full h-full flex flex-col items-center justify-center gap-3 py-6">
             <div className="w-full flex justify-between px-6">
@@ -34,7 +36,7 @@ export default function Review() {
                 {cart?.map(product => (
                     <ReviewItem key={product.id} product={product} />
                 ))}
-                <Link className="w-full bg-beige rounded-full font-bold py-2 px-8 my-5 hover:bg-pink" href="/products"
+                <Link className="w-full bg-beige rounded-full font-bold py-2 px-8 my-5 hover:bg-pink" href="/products" onClick={() => setOverlays()}
                 style={{
                     opacity: `${!totalItems ? "1" : "0"}`,
                     display: ` ${!totalItems ? "" : "none"}`,
@@ -46,10 +48,15 @@ export default function Review() {
             <hr className="w-full border-beige" />
             <div className='w-full flex justify-between px-4'>
                 <div className='text-sm'>Sub-Total</div>
-                <div className='text-xl font-bold'>${totalPrice ? totalPrice.toFixed(2) : "0.00"}</div>
+                <div className='text-xl font-bold'>${isTotalZero ? "0.00" : totalPrice}</div>
             </div>
             <div className="w-full px-4 flex">
-                <button onClick={toggleCheckout} className="grow text-center w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg">
+                <button onClick={toggleCheckout} 
+                className= {`grow text-center w-full bg-beige rounded-full font-bold py-2 px-8 lg:text-lg 
+                    ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}
+                `}
+                disabled={isTotalZero}
+                >
                     Checkout
                 </button>
             </div>

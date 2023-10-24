@@ -24,7 +24,13 @@ interface Actions {
 const INITIAL_STATE: State = {
  cart: [],
  totalItems: 0,
- totalPrice: 0,
+ totalPrice: 0.00,
+}
+
+// Create function to round numbers to 2 decimal places
+const roundToTwoDecimals = (num: number) => {
+    const result = Number(Math.round(parseFloat(num + 'e' + 2)) + 'e-' + 2);
+    return result;
 }
 
 // Create the store with Zustand, combining the status interface and actions
@@ -46,7 +52,7 @@ export const useCartStore = create(
                     set(state => ({
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
-                        totalPrice: state.totalPrice + (cartItem.price * quantity),
+                        totalPrice: roundToTwoDecimals(state.totalPrice + (cartItem.price * quantity)),
                     }))
                 } else {
                     const updatedCart = [...cart, { ...product, quantity: quantity }]
@@ -54,7 +60,7 @@ export const useCartStore = create(
                     set(state => ({
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
-                        totalPrice: state.totalPrice + (product.price * quantity),
+                        totalPrice: roundToTwoDecimals(state.totalPrice + (product.price * quantity)),
                     }))
                 }
 
@@ -88,7 +94,7 @@ export const useCartStore = create(
                         set(state => ({
                             cart: updatedCart,
                             totalItems: state.totalItems - 1,
-                            totalPrice: state.totalPrice - product.price,
+                            totalPrice: roundToTwoDecimals((state.totalPrice - product.price)),
                         }))
                     }
                 }
@@ -101,7 +107,7 @@ export const useCartStore = create(
                     set(state => ({
                         cart: state.cart.filter(item => item.id !== product.id),
                         totalItems: state.totalItems - cartItem.quantity,
-                        totalPrice: state.totalPrice - (cartItem.price * cartItem.quantity),
+                        totalPrice: roundToTwoDecimals(state.totalPrice - (cartItem.price * cartItem.quantity)),
                     }));
                 }
             },

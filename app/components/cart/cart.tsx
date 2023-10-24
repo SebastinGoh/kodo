@@ -13,13 +13,8 @@ export default function Cart() {
     const toggleReview = useOverlayStore(state => state.toggleReview)
     const setOverlays = useOverlayStore(state => state.setOverlays)
 
-    let total = 0;
-    if (cart) {
-        // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
-        total = cart.reduce((acc, product) => acc + product.price * (product.quantity as number), 0);
-    };
-
-    const isTotalZero = total === 0;
+    const totalPrice = useFromStore(useCartStore, state => state.totalPrice);
+    const isTotalZero = totalPrice === 0.00;
 
     return (
         <section className="bg-orange rounded-t-ml text-lg w-full flex flex-col items-center justify-center gap-2 py-4">
@@ -51,7 +46,7 @@ export default function Cart() {
             <hr className="w-full border-beige" />
             <div className='w-full flex justify-between px-4'>
                 <div className='text-sm'>Sub-Total</div>
-                <div className='text-xl font-bold'>${total.toFixed(2)}</div>
+                <div className='text-xl font-bold'>${totalPrice ? totalPrice : "0.00"}</div>
             </div>
             <div className="w-full px-4">
                 <button onClick={toggleReview} disabled={isTotalZero} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>

@@ -42,7 +42,7 @@ const OrderSummaryAccordion = () => {
                         </div>
                         <div className=''>
                             {totalItems} {totalItems == 1 ? "item" : "items"} @
-                            ${totalPrice ? totalPrice.toFixed(2) : "0.00"}
+                            ${totalPrice ? totalPrice : "0.00"}
                         </div>
                     </div>
                 </button>
