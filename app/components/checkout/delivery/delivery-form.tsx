@@ -1,34 +1,68 @@
 'use client';
 
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { set, useForm } from 'react-hook-form';
 import AddressFields from '@/app/components/checkout/delivery/address-fields';
 import { useScreenStore } from "@/app/store/useScreenStore";
 import { OrderData } from '@/app/types';
+import { handleOrder } from '@/app/components/checkout/delivery/handle-order';
+import { useCartStore } from "@/app/store/useCartStore";
+import useFromStore from "@/app/hooks/useFromStore";
 
 const DeliveryForm: FC = () => {
 
-  const activateScreen = useScreenStore(state => state.activateScreen)
-  const isDeliveryScreenOpen = useScreenStore(state => state.Screens.isDeliveryScreenOpen)
+  const activateScreen = useScreenStore(state => state.activateScreen);
+  const screenState = useScreenStore();
 
+  const cart = useFromStore(useCartStore, state => state.cart) ?? [];
+  const totalPrice = useFromStore(useCartStore, state => state.totalPrice) ?? 0;
+  const paymentUrl = useFromStore(useCartStore, state => state.paymentUrl) ?? "";
+  const setPaymentUrl = useCartStore(state => state.setPaymentUrl);
+  
   const { 
     register, 
     handleSubmit,
     setValue,
+    reset,
   } = useForm<OrderData>();
 
+  const [address, setAddress] = useState<string>("");
+
+  useEffect(() => {
+    if (paymentUrl) {
+      // reset({
+      //   firstname: "",
+      //   lastname: "",
+      //   email: "",
+      //   block: "",
+      //   address: "",
+      //   postalcode: "",
+      //   remarks: "",
+      // }); 
+      window.open(paymentUrl, "_blank");
+      activateScreen("payment");
+    }
+  }, [paymentUrl]);
+
   function onSubmit(data: OrderData) {
-    //fix getting address info
-    //fix order summary drop down
-    //fix places suggestion drop down
+    
+    data["cart"] = cart;
+    data["totalPrice"] = totalPrice;
+    data["address"] = address;
 
-    console.log(data);
-    // submit data to backend and create new order ID with payment 'pending'
-    // make new payment request to HitPay
-    // Redirect to HitPay payment page
-
-    // Show pending payment screen
-    activateScreen("payment");
+    const fetchPaymentUrl = () => {
+      handleOrder(data)
+      .then((res) => {
+        if (setPaymentUrl) {
+          setPaymentUrl(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+    fetchPaymentUrl();
   }
 
   return (
@@ -53,7 +87,7 @@ const DeliveryForm: FC = () => {
         className='w-full rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
         {...register('email', { required: true })}
         />
-        <AddressFields/>
+        <AddressFields setAddress={setAddress}/>
         <div className='flex gap-4'>
           <input
           type='text'

@@ -20,8 +20,8 @@ const OrderSummaryAccordion = () => {
     const totalItems = useFromStore(useCartStore, state => state.totalItems)
     
     return (
-        <div className="w-full bg-beige">
-            <h2 className="" id="orderSummaryTitle" >
+        <div className="w-full bg-beige z-[45]">
+            <h2 className="relative" id="orderSummaryTitle" >
                 <button
                 className="group relative flex w-full items-center text-left px-5 py-4 transition [overflow-anchor:none] hover:z-[2] focus:z-[3]"
                 type="button"
@@ -49,7 +49,7 @@ const OrderSummaryAccordion = () => {
             </h2>
             <div id="orderSummaryBody" className="!visible border-0 hidden" data-te-collapse-item aria-labelledby="orderSummaryBody">
                 <hr className="w-full border-slate-900" />
-                <div className="grow flex flex-col gap-2 py-2">
+                <div className="flex flex-col gap-2 py-2 fixed bg-beige w-full rounded-b-lg">
                     {cart?.map(product => (
                         <CheckoutItem key={product.id} product={product} />
                     ))}

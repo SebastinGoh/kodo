@@ -1,9 +1,16 @@
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import { Libraries, useLoadScript } from '@react-google-maps/api';
+import { ChangeEvent } from 'react';
 
 const libraries:Libraries = ['places'];
 
-const AddressFields = () => {
+type Props = {
+    setAddress: (address: string) => void;
+};
+  
+const AddressFields: React.FC<Props> = (
+    {setAddress}
+) => {
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
@@ -23,6 +30,16 @@ const AddressFields = () => {
         cache: 24 * 60 * 60,
     });
 
+    function handleSelect(description: string) {
+        setValue(description, false);
+        setAddress(description);
+        clearSuggestions();
+    }
+
+    function handleAddressChange(event: ChangeEvent<HTMLInputElement>) {
+        setValue(event.target.value);
+        setAddress(event.target.value);
+    }
     const renderSuggestions = () => {
         return data.map((suggestion) => {
             const {
@@ -34,10 +51,7 @@ const AddressFields = () => {
         return (
             <li
                 key={place_id}
-                onClick={() => {
-                    setValue(description, false);
-                    clearSuggestions();
-                }}
+                onClick={() => handleSelect(description)}
                 className='block px-4 py-2 hover:bg-gray-100'
             >
                 <strong>{main_text}</strong> <small>{secondary_text}</small>
@@ -46,17 +60,18 @@ const AddressFields = () => {
         });
     };
     return (
-        <div className='w-full'>
+        <div className='w-full relative'>
             <input
+                id='address'
                 className='w-full rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
                 value={value}
                 disabled={!ready}
-                onChange={(e) => {setValue(e.target.value)}}
+                onChange={handleAddressChange}
                 placeholder='Address*'
             />
             {status === 'OK' && (
-                <div className="bg-white divide-y divide-gray-100 rounded-lg shadow mt-2">
-                    <ul className="py-2">
+                <div className="bg-white rounded-lg shadow mt-2 fixed">
+                    <ul className="h-40 overflow-y-auto rounded-lg">
                         {renderSuggestions()}
                     </ul>
                 </div>

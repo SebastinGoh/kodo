@@ -1,13 +1,16 @@
 import { useOverlayStore } from "@/app/store/useOverlayStore";
 import { useScreenStore } from "@/app/store/useScreenStore";
+import { useCartStore } from "@/app/store/useCartStore";
 
 export default function ConfirmationScreen() {
   
-    const isConfirmationScreenOpen = useScreenStore(state => state.Screens.isConfirmationScreenOpen)
-    const setOverlays = useOverlayStore(state => state.setOverlays)
-    const activateScreen = useScreenStore(state => state.activateScreen)
+    const setOverlays = useOverlayStore(state => state.setOverlays);
+    const activateScreen = useScreenStore(state => state.activateScreen);
+    const setPaymentUrl = useCartStore(state => state.setPaymentUrl);
 
     function handleClick() {
+
+        setPaymentUrl("");
 
         // reset screen variables in state
         activateScreen("reset");
@@ -18,7 +21,7 @@ export default function ConfirmationScreen() {
     }
 
     return (
-        <div className={`${isConfirmationScreenOpen ? "flex flex-1 opacity-100 left-0" : "hidden opacity-0 -left-100"}`}>
+        <div className="flex flex-1 opacity-100 left-0">
             <div className='flex flex-col px-8 pb-8'>
                 <div className="flex-1 flex flex-col items-center justify-center gap-4">
                     <div className="text-center">

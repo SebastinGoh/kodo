@@ -5,7 +5,13 @@ import DeliveryScreen from "@/app/components/checkout/delivery/delivery-screen";
 import PaymentScreen from "@/app/components/checkout/payment-screen";
 import ConfirmationScreen from "@/app/components/checkout/confirmation-screen";
 
+import { useScreenStore } from "@/app/store/useScreenStore";
+
 export default function Checkout() {
+
+    const isDeliveryScreenOpen = useScreenStore(state => state.Screens.isDeliveryScreenOpen)
+    const isPaymentScreenOpen = useScreenStore(state => state.Screens.isPaymentScreenOpen)
+    const isConfirmationScreenOpen = useScreenStore(state => state.Screens.isConfirmationScreenOpen)
 
     return (
         <section className="bg-pink text-lg w-full h-full flex flex-col items-center justify-center gap-4 pt-6">
@@ -14,9 +20,9 @@ export default function Checkout() {
             </div>
             <BackArrow />
             <ProgressBar />
-            <DeliveryScreen />
-            <PaymentScreen />
-            <ConfirmationScreen />
+            {isDeliveryScreenOpen && <DeliveryScreen />}
+            {isPaymentScreenOpen && <PaymentScreen />}
+            {isConfirmationScreenOpen && <ConfirmationScreen />}
         </section>
     )
 };

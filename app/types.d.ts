@@ -29,6 +29,10 @@ export type OrderData = {
     email: string;
     address: string;
     block: string;
-    postalcode: number;
+    postalcode: string;
     remarks: string;
+    paymentSuccess: boolean;
+    cart: Product[];
+    totalPrice: number;
+    insertedId: string;
 }

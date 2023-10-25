@@ -3,18 +3,13 @@ import { useCartStore } from "@/app/store/useCartStore";
 
 export default function PaymentScreen() {
   
-    const isPaymentScreenOpen = useScreenStore(state => state.Screens.isPaymentScreenOpen)
     const activateScreen = useScreenStore(state => state.activateScreen)
-
+    const paymentUrl = useCartStore(state => state.paymentUrl)
     const resetCart = useCartStore(state => state.resetCart)
 
     function handleClick() {
         // provide redirect link to HitPay payment page
-        window.alert("Redirecting to payment screen...");
-
-        // for now got button to test confirmation screen
-        // after receiving confirmation from HitPay, show confirmation screen & reset Cart
-        // for now reset cart on click
+        window.alert(paymentUrl);
     }
 
     function Test() {
@@ -26,7 +21,7 @@ export default function PaymentScreen() {
     }
 
     return (
-        <div className={`${isPaymentScreenOpen ? "flex flex-1 opacity-100 left-0" : "hidden opacity-0 -left-100"}`}>
+        <div className="flex-1 flex opacity-100 left-0">
             <div className='flex flex-col px-8 pb-8'>
                 <div className="flex-1 flex flex-col items-center justify-center gap-4">
                     <div role="status">
@@ -40,9 +35,9 @@ export default function PaymentScreen() {
                         Please complete payment on the next screen.
                     </div>
                 </div>
-                <button onClick={handleClick} className='bg-beige w-full rounded-lg py-3 px-8 font-semibold outline-none'>
+                <a href={paymentUrl} target={"_blank"} rel={"noopener noreferrer"} className='bg-beige w-full rounded-lg py-3 px-8 font-semibold outline-none'>
                     Redirect to Payment Screen
-                </button>
+                </a>
                 <a href="#" onClick={Test} className='pt-4 text-center underline'>
                     Test Confirmation
                 </a>
