@@ -1,5 +1,8 @@
+'use client'
+import { useEffect } from 'react';
 import { useScreenStore } from "@/app/store/useScreenStore";
 import { useCartStore } from "@/app/store/useCartStore";
+import useFromStore from "@/app/hooks/useFromStore";
 
 export default function PaymentScreen() {
   
@@ -7,14 +10,14 @@ export default function PaymentScreen() {
     const paymentUrl = useCartStore(state => state.paymentUrl);
     const resetCart = useCartStore(state => state.resetCart);
 
-    const paymentSuccess = useCartStore(state => state.paymentSuccess);
-
-    if (paymentSuccess) {
-        // if payment is successful, show confirmation screen and reset cart
-        activateScreen("confirmation");
-        resetCart();
-        // if payment is unsuccessful, show error screen
-    }
+    const paymentSuccess = useFromStore(useCartStore,state => state.paymentSuccess);
+    
+    useEffect(() => {
+        if (paymentSuccess === true) {
+            activateScreen("confirmation");
+            resetCart();
+        }
+    }, [paymentSuccess]);
 
     function Test() {
         // for now got button to test confirmation screen

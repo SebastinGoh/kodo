@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
     data.delete("hmac");
     data.sort();
     const check = data.toString().replace(/[$=&]/g, "");
-    console.log(check);
     const signed = generateSignatureArray(secret, check);
     
     if (signed !== hmac) {
