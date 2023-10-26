@@ -11,6 +11,7 @@ interface State {
  totalItems: number
  totalPrice: number
  paymentUrl: string
+ paymentSuccess: boolean
 }
 
 // Define the interface of the actions that can be performed in the Cart
@@ -19,6 +20,7 @@ interface Actions {
  reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
  setPaymentUrl: (url: string) => void
+ setPaymentSuccess: (success: boolean) => void
  resetCart: () => void
 }
 
@@ -28,6 +30,7 @@ const INITIAL_STATE: State = {
     totalItems: 0,
     totalPrice: 0.00,
     paymentUrl: "",
+    paymentSuccess: false,
 }
 
 // Create function to round numbers to 2 decimal places
@@ -44,6 +47,7 @@ export const useCartStore = create(
             totalItems: INITIAL_STATE.totalItems,
             totalPrice: INITIAL_STATE.totalPrice,
             paymentUrl: INITIAL_STATE.paymentUrl,
+            paymentSuccess: INITIAL_STATE.paymentSuccess,
             addToCart: (product: Product, quantity = 1, openCart = false, openReview = false) => {
                 const cart = get().cart
                 const cartItem = cart.find(item => item.id === product.id)
@@ -119,6 +123,12 @@ export const useCartStore = create(
                 set(state => ({
                     ...state,
                     paymentUrl: url,
+                }))
+            },
+            setPaymentSuccess: (success: boolean) => {
+                set(state => ({
+                    ...state,
+                    paymentSuccess: success,
                 }))
             },
             resetCart: () => {

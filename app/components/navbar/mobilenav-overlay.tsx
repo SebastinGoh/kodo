@@ -5,11 +5,10 @@ import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 export default function MobileNav() {
     
-    const isMobileNavOpen = useOverlayStore(state => state.Overlays.isMobileNavOpen)
     const toggleMobileNav = useOverlayStore(state => state.toggleMobileNav)
 
     return (
-        <div className={`inset-0 bg-beige flex content-center justify-center z-10 ${isMobileNavOpen ? "fixed opacity-100 bottom-0" : "hidden opacity-0 -bottom-100"}`}>
+        <div className="inset-0 bg-beige flex content-center justify-center z-10 fixed opacity-100 bottom-0">
             <Image className="absolute left-5 top-5" src="/logo.png" width={100} height={100} alt="Logo"/>
 
             <button className="absolute right-0 py-10 px-6" onClick={toggleMobileNav}>

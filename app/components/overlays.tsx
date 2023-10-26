@@ -21,11 +21,11 @@ export default function Overlays() {
 
     return (
         <>
-        <ModalOverlay />
-        <CheckoutOverlay />
-        <ReviewOverlay />
-        <CartOverlay />
-        <MobileNavOverlay />
+        {Overlays.isModalOpen && <ModalOverlay />}
+        {Overlays.isCheckoutOpen && <CheckoutOverlay />}
+        {Overlays.isReviewOpen && <ReviewOverlay />}
+        {Overlays.isCartOpen && <CartOverlay />}
+        {Overlays.isMobileNavOpen && <MobileNavOverlay />}
         </>
     )
 } 

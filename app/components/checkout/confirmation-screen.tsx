@@ -7,6 +7,7 @@ export default function ConfirmationScreen() {
     const setOverlays = useOverlayStore(state => state.setOverlays);
     const activateScreen = useScreenStore(state => state.activateScreen);
     const setPaymentUrl = useCartStore(state => state.setPaymentUrl);
+    const setPaymentSuccess = useCartStore(state => state.setPaymentSuccess);
 
     function handleClick() {
 
@@ -15,6 +16,9 @@ export default function ConfirmationScreen() {
         // reset screen variables in state
         activateScreen("reset");
 
+        // reset payment success in state
+        setPaymentSuccess(false);
+        
         // close all overlays
         setOverlays();
 

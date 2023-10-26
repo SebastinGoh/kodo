@@ -10,10 +10,11 @@ import { handleOrder } from '@/app/components/checkout/delivery/handle-order';
 import { useCartStore } from "@/app/store/useCartStore";
 import useFromStore from "@/app/hooks/useFromStore";
 
-const DeliveryForm: FC = () => {
+import { useRouter } from 'next/navigation';
 
+const DeliveryForm: FC = () => {
+  const router = useRouter();
   const activateScreen = useScreenStore(state => state.activateScreen);
-  const screenState = useScreenStore();
 
   const cart = useFromStore(useCartStore, state => state.cart) ?? [];
   const totalPrice = useFromStore(useCartStore, state => state.totalPrice) ?? 0;
@@ -40,7 +41,7 @@ const DeliveryForm: FC = () => {
       //   postalcode: "",
       //   remarks: "",
       // }); 
-      window.open(paymentUrl, "_blank");
+      
       activateScreen("payment");
     }
   }, [paymentUrl]);
@@ -56,6 +57,7 @@ const DeliveryForm: FC = () => {
       .then((res) => {
         if (setPaymentUrl) {
           setPaymentUrl(res);
+          router.push(res);
         }
       })
       .catch((err) => {

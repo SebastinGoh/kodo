@@ -3,13 +3,17 @@ import { useCartStore } from "@/app/store/useCartStore";
 
 export default function PaymentScreen() {
   
-    const activateScreen = useScreenStore(state => state.activateScreen)
-    const paymentUrl = useCartStore(state => state.paymentUrl)
-    const resetCart = useCartStore(state => state.resetCart)
+    const activateScreen = useScreenStore(state => state.activateScreen);
+    const paymentUrl = useCartStore(state => state.paymentUrl);
+    const resetCart = useCartStore(state => state.resetCart);
 
-    function handleClick() {
-        // provide redirect link to HitPay payment page
-        window.alert(paymentUrl);
+    const paymentSuccess = useCartStore(state => state.paymentSuccess);
+
+    if (paymentSuccess) {
+        // if payment is successful, show confirmation screen and reset cart
+        activateScreen("confirmation");
+        resetCart();
+        // if payment is unsuccessful, show error screen
     }
 
     function Test() {
@@ -35,7 +39,7 @@ export default function PaymentScreen() {
                         Please complete payment on the next screen.
                     </div>
                 </div>
-                <a href={paymentUrl} target={"_blank"} rel={"noopener noreferrer"} className='bg-beige w-full rounded-lg py-3 px-8 font-semibold outline-none'>
+                <a href={paymentUrl} target={"_blank"} rel={"noopener noreferrer"} className='bg-beige w-full rounded-lg text-center py-3 px-8 font-semibold outline-none'>
                     Redirect to Payment Screen
                 </a>
                 <a href="#" onClick={Test} className='pt-4 text-center underline'>

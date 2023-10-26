@@ -2,8 +2,10 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { OrderData } from '@/app/types';
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const { firstname, email, totalPrice, insertedId } = await request.json();
-  
+  const { firstname, lastname, email, totalPrice, insertedId } = await request.json();
+  const webhook = process.env.KODO_HITPAY_WEBHOOK as string;
+  const redirect_url = process.env.KODO_HITPAY_SUCCESS as string;
+
   const options = {
     method: 'POST',
     headers: {
@@ -11,14 +13,16 @@ export async function POST(request: NextRequest, response: NextResponse) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "name": firstname,
+      "name": firstname + " " + lastname,
       "email": email,
       "amount": totalPrice,
       "currency": "SGD",
-      reference_number: insertedId,
+      "reference_number": insertedId,
+      "webhook": webhook,
+      "redirect_url": redirect_url,
+      "purpose": "Kodo Order",
     })
   };
-  
   try {
     const response = await fetch('https://api.sandbox.hit-pay.com/v1/payment-requests', options);
     const data = await response.json();

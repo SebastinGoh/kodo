@@ -51,3 +51,6 @@ Form Logic for Contact Us and User & Shipping Info (React-Hook-Form)
 
 Google API Places Logic
 - https://www.99darshan.com/posts/interactive-maps-using-nextjs-and-google-maps
+
+Webhook Testing by exposing localhost to web (ngrok)
+- https://dev.to/ibrarturi/how-to-test-webhooks-on-your-localhost-3b4f
