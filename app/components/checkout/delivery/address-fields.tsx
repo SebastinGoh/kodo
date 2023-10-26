@@ -24,7 +24,7 @@ const AddressFields: React.FC<Props> = (
         setValue,
         clearSuggestions,
     } = usePlacesAutocomplete({
-        callbackName: 'initMap',
+        callbackName: '',
         requestOptions: { componentRestrictions:{ country: 'sg' } },
         debounce: 300,
         cache: 24 * 60 * 60,
