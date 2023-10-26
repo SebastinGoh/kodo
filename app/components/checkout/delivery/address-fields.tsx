@@ -65,7 +65,6 @@ const AddressFields: React.FC<Props> = (
                 id='address'
                 className='w-full rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
                 value={value}
-                disabled={!ready}
                 onChange={handleAddressChange}
                 placeholder='Address*'
             />
