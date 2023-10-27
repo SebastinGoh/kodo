@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
-import { sendEmail } from '@/app/(pages)/contact/send-email';
+import { sendContactEmail } from '@/app/(pages)/contact/send-contact-email';
 
 import { useOverlayStore } from '@/app/store/useOverlayStore';
 
@@ -27,7 +27,7 @@ const ContactForm: FC = () => {
       
       const fetchEmailConfirmation = () => {
         setIsLoading(true);
-        sendEmail(data)
+        sendContactEmail(data)
         .then((res) => {
           if (res.status === 200) {
             openEmailConfirmModal(data["name"]);
