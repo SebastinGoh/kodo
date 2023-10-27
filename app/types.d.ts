@@ -17,6 +17,12 @@ export interface Overlays {
     isCheckoutOpen: boolean
 }
 
+export interface ModalContent {
+    modalType: string | null
+    removingProduct: Product | null
+    emailName: string | null
+}
+
 export interface Screens {
     isDeliveryScreenOpen: boolean
     isPaymentScreenOpen: boolean

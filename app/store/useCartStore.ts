@@ -91,8 +91,8 @@ export const useCartStore = create(
                 // If the item quantity is 1, remove it from the Cart
                 if (cartItem) {
                     if (cartItem.quantity === 1) {
-                        const openModal = useOverlayStore.getState().openModal;
-                        openModal(cartItem);
+                        const openRemoveProductModal = useOverlayStore.getState().openRemoveProductModal;
+                        openRemoveProductModal(cartItem);
                     }
                     // If the item quantity is more than 1, reduce its quantity
                     else {

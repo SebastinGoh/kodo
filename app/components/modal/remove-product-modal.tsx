@@ -1,15 +1,16 @@
 import { useOverlayStore } from "@/app/store/useOverlayStore";
 import { useCartStore } from "@/app/store/useCartStore";
 
-export default function Modal() {
+export default function RemoveProductModal() {
     
     const closeModal = useOverlayStore(state => state.closeModal)
-    const modalProduct = useOverlayStore(state => state.modalProduct)
+            
+    const removingProduct = useOverlayStore(state => state.modalContent.removingProduct)
     const removeFromCart = useCartStore(state => state.removeFromCart)
-
+            
     function handleConfirm() {
-        if (modalProduct) {
-            removeFromCart(modalProduct);
+        if (removingProduct) {
+            removeFromCart(removingProduct);
             closeModal();
         }
     }
@@ -29,7 +30,7 @@ export default function Modal() {
                 </div>
                 <hr className="w-full border-beige" />
                 <p className="">
-                    Do you want to remove <span className="font-semibold">{modalProduct?.name}</span> from your cart?
+                    Do you want to remove <span className="font-semibold">{removingProduct?.name}</span> from your cart?
                 </p>
                 <div className="flex justify-around">
                     <button onClick={closeModal} className="border-2 border-slate-900 rounded-full font-bold py-2 px-8 lg:text-lg">

@@ -1,11 +1,10 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 
-import { Product, Overlays } from "@/app/types";
+import { Product, Overlays, ModalContent } from "@/app/types";
 
 interface State {
-    modalProduct: Product | null
     Overlays: Overlays
+    modalContent: ModalContent
 }
 
 interface Actions {
@@ -14,7 +13,8 @@ interface Actions {
     toggleReview: () => void
     toggleCheckout: () => void
     openCheckout: () => void
-    openModal: (Item: Product) => void
+    openRemoveProductModal: (product: Product) => void
+    openEmailConfirmModal: (name: string) => void
     closeModal: () => void
     setOverlays: (
         mobileNav?: boolean,
@@ -34,12 +34,16 @@ const INITIAL_STATE: State = {
         isModalOpen: false,
         isCheckoutOpen: false,
     },
-    modalProduct: null,
+    modalContent: {
+        modalType: null,
+        removingProduct: null,
+        emailName: null,
+    }
 }
 
 export const useOverlayStore = create<State & Actions>((set, get) => ({
     Overlays: INITIAL_STATE.Overlays,
-    modalProduct: INITIAL_STATE.modalProduct,
+    modalContent: INITIAL_STATE.modalContent,
 
     // Toggle overlays
     toggleMobileNav: () => set({ Overlays: { ...get().Overlays, isMobileNavOpen: !get().Overlays.isMobileNavOpen } }),
@@ -48,17 +52,37 @@ export const useOverlayStore = create<State & Actions>((set, get) => ({
     toggleCheckout: () => set({ Overlays: { ...get().Overlays, isCheckoutOpen: !get().Overlays.isCheckoutOpen } }),
 
     openCheckout: () => set({ Overlays: { ...get().Overlays, isCheckoutOpen: true } }),
-    // Open and close modal
-    openModal: (product: Product) => {
+    // Open remove product modal
+    openRemoveProductModal: (product: Product) => {
         set((state: State) => ({
             ...state,
             Overlays: {
                 ...state.Overlays,
                 ...{ isModalOpen: true },
             },
-            modalProduct: product
+            modalContent: {
+                ...state.modalContent,
+                modalType: 'removeProduct',
+                removingProduct: product
+            }
         }));
     },
+    // Open email confirm modal
+    openEmailConfirmModal: (name: string) => {
+        set((state: State) => ({
+            ...state,
+            Overlays: {
+                ...state.Overlays,
+                ...{ isModalOpen: true },
+            },
+            modalContent: {
+                ...state.modalContent,
+                modalType: 'emailConfirm',
+                emailName: name
+            }
+        }));
+    },
+    // Close modal and reset modal content
     closeModal: () => {
         set((state: State) => ({
             ...state,
@@ -66,7 +90,7 @@ export const useOverlayStore = create<State & Actions>((set, get) => ({
                 ...state.Overlays,
                 ...{ isModalOpen: false },
             },
-            modalProduct: null
+            modalContent: INITIAL_STATE.modalContent
         }));
     },
 
