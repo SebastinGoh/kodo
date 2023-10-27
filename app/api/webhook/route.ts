@@ -37,6 +37,10 @@ export async function POST(request: NextRequest) {
 
     try {
         const updateConfirmation = await ordersCollection.updateOne(filter, update);
+        if (updateConfirmation.modifiedCount === 0) {
+            return NextResponse.json({ error: "No order found" }, { status: 500 });
+        }
+        
         return NextResponse.json(updateConfirmation, { status: 200 });
     } catch (err) {
         return NextResponse.json({ error: err }, { status: 500 });
