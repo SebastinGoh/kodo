@@ -16,9 +16,10 @@ export default function Home() {
   const status = urlParams.get('status')?.toString();
   const openCheckout = useOverlayStore(state => state.openCheckout);
   const setPaymentSuccess = useCartStore(state => state.setPaymentSuccess);
+  const totalPrice = useCartStore(state => state.totalPrice);
 
   useEffect(() => {
-    if (status === 'completed') {
+    if (status === 'completed' && totalPrice !== 0.00) {
       setPaymentSuccess(true);
       openCheckout();
     }
