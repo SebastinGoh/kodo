@@ -14,7 +14,7 @@ export default function ProductCard({ product } : Props) {
     const addToCart = useCartStore(state => state.addToCart)
 
     return (
-        <div key={product.id} className="max-w-xs border bg-white rounded-lg pb-4 flex-none shadow">
+        <div key={product.id} className="max-w-xs bg-white rounded-lg pb-4 flex-none shadow">
             <Link href={`/products/${product.URLname}`} className="w-full h-80 overflow-hidden">
                 <Image className="rounded-t-lg" src={`/product/${product.images[0]}`} width={350} height={100} alt={product.name} />
             </Link>
