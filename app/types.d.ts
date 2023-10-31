@@ -30,8 +30,7 @@ export interface Screens {
 }
 
 export type OrderData = {
-    firstname: string;
-    lastname: string;
+    name: string;
     email: string;
     address: string;
     block: string;

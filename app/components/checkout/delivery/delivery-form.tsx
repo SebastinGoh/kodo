@@ -33,16 +33,6 @@ const DeliveryForm: FC = () => {
 
   useEffect(() => {
     if (paymentUrl) {
-      // reset({
-      //   firstname: "",
-      //   lastname: "",
-      //   email: "",
-      //   block: "",
-      //   address: "",
-      //   postalcode: "",
-      //   remarks: "",
-      // }); 
-      
       activateScreen("payment");
     }
   }, [paymentUrl]);
@@ -72,20 +62,12 @@ const DeliveryForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 p-2 pb-8">
-        <div className='flex gap-4'>
-          <input
-          type='text'
-          placeholder='First Name*'
-          className='w-1/2 rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
-          {...register('firstname', { required: true })}
-          />
-          <input
-          type='text'
-          placeholder='Last Name*'
-          className='w-1/2 rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
-          {...register('lastname', { required: true })}
-          />  
-        </div>
+        <input
+        type='text'
+        placeholder='Name*'
+        className='w-full rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
+        {...register('name', { required: true })}
+        />
         <input
         type='email'
         placeholder='Email*'
