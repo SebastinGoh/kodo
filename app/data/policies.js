@@ -35,11 +35,9 @@ export default [
         policy: "Returns & Refunds",
         bookmark: "returnsandrefunds",
         details: [
-            "We do not accept returns or give refunds. However, in the unlikely event that you receive the wrong item, or your item has been damaged in transit, please contact us within 7 days of receiving your products to request for an exchange only.",
-            "Please specify order number, and send along photos of the damaged item for us to review.",
-            "Exchanges are subject to stock availability. If the item is unavailable, we will replace it with a similar item or offer you a store credit.",
-            "Sale items are final and not eligible for exchange and/or returns.",
-            "Any delivery/shipping charges incurred for the return of products will be paid for by the customer."
+            "We regret to inform you that we do not provide refunds for any products purchased.",
+            "However, in the rare event that you receive an incorrect item or your product arrives damaged during transit, we are committed to addressing these issues promptly.",
+            "Please contact us within 7 days of receiving your products to request an exchange."
         ],
     },
 ]
