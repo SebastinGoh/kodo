@@ -1,6 +1,13 @@
 import Link from "next/link";
+import data from "@/app/data/products";
+import { Product } from "@/app/types";
 
 export default function USP() {
+
+    const products:Product[] = data;
+    const featuredProduct1 = products.find((product) => product.name === "Amazing Dough Set 1");
+    const featuredProduct2 = products.find((product) => product.name === "Amazing Dough Set 2");
+
     const video = "/hero_video_L.mp4";
     return (
         <div className="">
@@ -22,7 +29,7 @@ export default function USP() {
                             Build, squish, and build again!
                             With 2.5lbs of Kinetic Beach Sand and everything you need to create epic sandcastles, this resealable sandbox provides endless hours of creative play!
                         </p>
-                        <Link className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                        <Link className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href={`/products/${featuredProduct1?.URLname}/`}>
                             BUY NOW
                         </Link>
                     </div>
@@ -44,7 +51,7 @@ export default function USP() {
                             Mold castles, sharks, and turtles with 1lb of Kinetic Sand, 
                             and use the included shovel tool to dig, scoop, flow, and mold. Available in Blue, Purple & Green!
                         </p>
-                        <Link className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href="#">
+                        <Link className="bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink lg:text-lg" href={`/products/${featuredProduct2?.URLname}/`}>
                             BUY NOW
                         </Link>
                     </div>
