@@ -19,13 +19,6 @@ export default function PaymentScreen() {
         }
     }, [paymentSuccess]);
 
-    function Test() {
-        // for now got button to test confirmation screen
-        // after receiving confirmation from HitPay, show confirmation screen & reset Cart
-        // for now reset cart on click
-        activateScreen("confirmation");
-        resetCart();
-    }
 
     return (
         <div className="flex-1 flex opacity-100 left-0">
@@ -44,9 +37,6 @@ export default function PaymentScreen() {
                 </div>
                 <a href={paymentUrl} target={"_blank"} rel={"noopener noreferrer"} className='bg-beige w-full rounded-lg text-center py-3 px-8 font-semibold outline-none'>
                     Redirect to Payment Screen
-                </a>
-                <a href="#" onClick={Test} className='pt-4 text-center underline'>
-                    Test Confirmation
                 </a>
             </div>
         </div>
