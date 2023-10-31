@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const filter = { _id: new ObjectId(reference_number) };
     const update = { $set: { paymentSuccess: true } };
 
-    const dbname = "kodotest";
+    const dbname = process.env.DB_NAME as string;
     const collectionName = "orders";
     const ordersCollection = (await clientPromise).db(dbname).collection(collectionName);
 
