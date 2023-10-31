@@ -6,23 +6,6 @@ export default function Footer() {
             <div className="mx-auto w-full max-w-6xl">
                 <div className="flex flex-wrap justify-around gap-8 px-6 py-16 md:flex-nowrap">
                     <div>
-                        <h2 className="mb-6 uppercase font-semibold">Sitemap</h2>
-                        <ul className="font-md">
-                            <li className="mb-4">
-                                <Link href="/products" className="hover:underline">Products</Link>
-                            </li>
-                            <li className="mb-4">
-                                <Link href="/about" className="hover:underline">About</Link>
-                            </li>
-                            <li className="mb-4">
-                                <Link href="/faq" className="hover:underline">FAQ</Link>
-                            </li>
-                            <li className="mb-4">
-                                <Link href="/contact" className="hover:underline">Contact Us</Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
                         <Link href="/policies" className="hover:underline">
                             <h2 className="mb-6 uppercase font-semibold">Policies</h2>
                         </Link>
@@ -38,6 +21,23 @@ export default function Footer() {
                             </li>
                             <li className="mb-4">
                                 <Link href="/policies#returnsandrefunds" className="hover:underline">Returns & Refunds</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 className="mb-6 uppercase font-semibold">Sitemap</h2>
+                        <ul className="font-md">
+                            <li className="mb-4">
+                                <Link href="/products" className="hover:underline">Products</Link>
+                            </li>
+                            <li className="mb-4">
+                                <Link href="/about" className="hover:underline">About</Link>
+                            </li>
+                            <li className="mb-4">
+                                <Link href="/faq" className="hover:underline">FAQ</Link>
+                            </li>
+                            <li className="mb-4">
+                                <Link href="/contact" className="hover:underline">Contact Us</Link>
                             </li>
                         </ul>
                     </div>
