@@ -30,6 +30,9 @@ export default function MobileNav() {
                 <li>
                     <Link href="/faq" onClick={toggleMobileNav}><p>FAQ</p></Link>
                 </li>
+                <li>
+                    <Link href="/contact" onClick={toggleMobileNav}><p>Contact Us</p></Link>
+                </li>
             </ul>
         </div>
     );

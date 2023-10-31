@@ -26,17 +26,20 @@ export default function Footer() {
                     </div>
                     <div>
                         <h2 className="mb-6 uppercase font-semibold">Sitemap</h2>
-                        <ul className="font-md">
-                            <li className="mb-4">
+                        <ul className="font-md flex flex-col gap-3">
+                            <li>
+                                <Link href="/" className="hover:underline">Home</Link>
+                            </li>
+                            <li>
                                 <Link href="/products" className="hover:underline">Products</Link>
                             </li>
-                            <li className="mb-4">
+                            <li>
                                 <Link href="/about" className="hover:underline">About</Link>
                             </li>
-                            <li className="mb-4">
+                            <li>
                                 <Link href="/faq" className="hover:underline">FAQ</Link>
                             </li>
-                            <li className="mb-4">
+                            <li>
                                 <Link href="/contact" className="hover:underline">Contact Us</Link>
                             </li>
                         </ul>
