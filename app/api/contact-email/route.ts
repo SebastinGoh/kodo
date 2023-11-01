@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import emailTemplate from '@/app/api/contact-email/email-template';
 
 export async function POST(request: NextRequest) {
   const { email, name, message } = await request.json();
@@ -12,25 +13,7 @@ export async function POST(request: NextRequest) {
       pass: process.env.MY_PASSWORD,
     },
   });
-
-  const mailOptions: Mail.Options = {
-    from: process.env.MY_EMAIL,
-    to: email,
-    bcc: process.env.MY_EMAIL,
-    subject: `Kodo - Thank you for contacting us!`,
-    text: 
-    `
-Dear ${name},
-\n
-Thank you for contacting Kodo. We will get back to you as soon as possible.
-\n
-Your message to us is as follows:
-${message}
-\n
-Best Regards,
-Kodo Team
-    `,
-  };
+  const mailOptions: Mail.Options = emailTemplate({ email, name, message });
 
   const sendMailPromise = () =>
     new Promise<string>((resolve, reject) => {
