@@ -9,7 +9,10 @@ import { useOverlayStore } from "@/app/store/useOverlayStore";
 interface State {
  cart: Product[]
  totalItems: number
+ subtotal: number
+ deliveryFee: number
  totalPrice: number
+ isCartEmpty: boolean
  paymentUrl: string
  paymentSuccess: boolean
 }
@@ -19,6 +22,9 @@ interface Actions {
  addToCart: (Item: Product, quantity?: number, openCart?: boolean, openReview?: boolean) => void
  reduceFromCart: (Item: Product) => void
  removeFromCart: (Item: Product) => void
+ updateIsCartEmpty: () => void
+ updateDeliveryFee: () => void
+ updateTotalPrice: () => void
  setPaymentUrl: (url: string) => void
  setPaymentSuccess: (success: boolean) => void
  resetCart: () => void
@@ -28,13 +34,16 @@ interface Actions {
 const INITIAL_STATE: State = {
     cart: [],
     totalItems: 0,
+    subtotal: 0.00,
+    deliveryFee: 0.00,
     totalPrice: 0.00,
+    isCartEmpty: true,
     paymentUrl: "",
     paymentSuccess: false,
 }
 
 // Create function to round numbers to 2 decimal places
-const roundToTwoDecimals = (num: number) => {
+const roundToTwoDecimals = (num: number): number => {
     const result = Number(Math.round(parseFloat(num + 'e' + 2)) + 'e-' + 2);
     return result;
 }
@@ -45,7 +54,10 @@ export const useCartStore = create(
         (set, get) => ({
             cart: INITIAL_STATE.cart,
             totalItems: INITIAL_STATE.totalItems,
+            subtotal: INITIAL_STATE.subtotal,
+            deliveryFee: INITIAL_STATE.deliveryFee,
             totalPrice: INITIAL_STATE.totalPrice,
+            isCartEmpty: INITIAL_STATE.isCartEmpty,
             paymentUrl: INITIAL_STATE.paymentUrl,
             paymentSuccess: INITIAL_STATE.paymentSuccess,
             addToCart: (product: Product, quantity = 1, openCart = false, openReview = false) => {
@@ -60,7 +72,7 @@ export const useCartStore = create(
                     set(state => ({
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
-                        totalPrice: roundToTwoDecimals(state.totalPrice + (cartItem.price * quantity)),
+                        subtotal: roundToTwoDecimals(state.subtotal + (cartItem.price * quantity)),
                     }))
                 } else {
                     const updatedCart = [...cart, { ...product, quantity: quantity }]
@@ -68,7 +80,7 @@ export const useCartStore = create(
                     set(state => ({
                         cart: updatedCart,
                         totalItems: state.totalItems + quantity,
-                        totalPrice: roundToTwoDecimals(state.totalPrice + (product.price * quantity)),
+                        subtotal: roundToTwoDecimals(state.subtotal + (product.price * quantity)),
                     }))
                 }
 
@@ -83,6 +95,19 @@ export const useCartStore = create(
                     const toggleReview = useOverlayStore.getState().toggleReview;
                     toggleReview();
                 }
+
+                // Update isCartEmpty
+                set(state => ({
+                    ...state,
+                    isCartEmpty: false,
+                }));
+
+                // Update the total price
+                get().updateTotalPrice();
+
+                // Update whether cart is empty, delivery fee and total price
+                get().updateIsCartEmpty();
+                get().updateDeliveryFee();
             },
             reduceFromCart: (product: Product) => {
                 const cart = get().cart
@@ -102,9 +127,11 @@ export const useCartStore = create(
                         set(state => ({
                             cart: updatedCart,
                             totalItems: state.totalItems - 1,
-                            totalPrice: roundToTwoDecimals((state.totalPrice - product.price)),
+                            subtotal: roundToTwoDecimals((state.subtotal - product.price)),
                         }))
                     }
+                    // Update the total price
+                    get().updateTotalPrice();
                 }
             },
             removeFromCart: (product: Product) => {
@@ -115,9 +142,48 @@ export const useCartStore = create(
                     set(state => ({
                         cart: state.cart.filter(item => item.id !== product.id),
                         totalItems: state.totalItems - cartItem.quantity,
-                        totalPrice: roundToTwoDecimals(state.totalPrice - (cartItem.price * cartItem.quantity)),
+                        subtotal: roundToTwoDecimals(state.subtotal - (cartItem.price * cartItem.quantity)),
                     }));
+                };
+
+                // Update the total price
+                get().updateTotalPrice();
+
+                // Update whether cart is empty, delivery fee and total price
+                get().updateIsCartEmpty();
+                get().updateDeliveryFee();
+            },
+            updateIsCartEmpty() {
+                const cart = get().cart;
+                const isCartEmpty = cart.length === 0;
+                set(state => ({
+                    ...state,
+                    isCartEmpty: isCartEmpty,
+                }))
+            },
+            updateDeliveryFee: () => {
+                const totalPrice = get().totalPrice;
+                let deliveryFee = 0.00;
+
+                // If the total price is more than 0, add delivery fee
+                if (totalPrice > 0) {
+                    deliveryFee = 5.00;
                 }
+
+                set(state => ({
+                    ...state,
+                    deliveryFee: roundToTwoDecimals(deliveryFee),
+                }))
+            },
+            updateTotalPrice: () => {
+                const subtotal = get().subtotal;
+                const deliveryFee = get().deliveryFee;
+                const totalPrice = roundToTwoDecimals(subtotal + deliveryFee);
+
+                set(state => ({
+                    ...state,
+                    totalPrice: totalPrice,
+                }))
             },
             setPaymentUrl: (url: string) => {
                 set(state => ({
@@ -135,7 +201,9 @@ export const useCartStore = create(
                 set(() => ({
                     cart: INITIAL_STATE.cart,
                     totalItems: INITIAL_STATE.totalItems,
+                    deliveryFee: INITIAL_STATE.deliveryFee,
                     totalPrice: INITIAL_STATE.totalPrice,
+                    isCartEmpty: INITIAL_STATE.isCartEmpty,
                     paymentURL: INITIAL_STATE.paymentUrl,
                 }))
             },

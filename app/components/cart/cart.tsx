@@ -13,14 +13,14 @@ export default function Cart() {
     const toggleReview = useOverlayStore(state => state.toggleReview)
     const setOverlays = useOverlayStore(state => state.setOverlays)
 
-    const totalPrice = useFromStore(useCartStore, state => state.totalPrice);
-    const isTotalZero = totalPrice === 0.00;
+    const subtotal = useFromStore(useCartStore, state => state.subtotal);
+    const isCartEmpty = useFromStore(useCartStore, state => state.isCartEmpty);
 
     return (
         <section className="bg-orange rounded-t-ml text-lg w-full flex flex-col items-center justify-center gap-2 py-4">
             <div className='text-lg w-full flex justify-between px-6'>
                 <span className='font-semibold'>
-                    {isTotalZero ? "Your Cart is Empty" : "My Cart"}
+                    {isCartEmpty ? "Your Cart is Empty" : "My Cart"}
                 </span>
                 <button className="" onClick={toggleCart}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -34,8 +34,8 @@ export default function Cart() {
                 ))}
                 <Link className="w-full my-5" href="/products"
                 style={{
-                    opacity: `${isTotalZero ? "1" : "0"}`,
-                    display: ` ${isTotalZero ? "" : "none"}`,
+                    opacity: `${isCartEmpty ? "1" : "0"}`,
+                    display: ` ${isCartEmpty ? "" : "none"}`,
                 }}
                 >
                     <button onClick={() => setOverlays()} className="w-full bg-beige rounded-full font-bold py-2 px-8 hover:bg-pink">
@@ -46,10 +46,10 @@ export default function Cart() {
             <hr className="w-full border-beige" />
             <div className='w-full flex justify-between px-4'>
                 <div className='text-sm'>Sub-Total</div>
-                <div className='text-xl font-bold'>${totalPrice ? totalPrice : "0.00"}</div>
+                <div className='text-xl font-bold'>${isCartEmpty ? "0.00" : subtotal}</div>
             </div>
             <div className="w-full px-4">
-                <button onClick={toggleReview} disabled={isTotalZero} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isTotalZero ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
+                <button onClick={toggleReview} disabled={isCartEmpty} className={`w-full bg-beige rounded-full font-bold py-2 lg:text-lg ${isCartEmpty ? "opacity-50 cursor-not-allowed" : "hover:bg-pink"}`}>
                     Review Order
                 </button>
             </div>
