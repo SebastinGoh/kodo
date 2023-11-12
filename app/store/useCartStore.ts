@@ -96,18 +96,12 @@ export const useCartStore = create(
                     toggleReview();
                 }
 
-                // Update isCartEmpty
-                set(state => ({
-                    ...state,
-                    isCartEmpty: false,
-                }));
-
-                // Update the total price
-                get().updateTotalPrice();
-
                 // Update whether cart is empty, delivery fee and total price
                 get().updateIsCartEmpty();
                 get().updateDeliveryFee();
+
+                // Update the total price
+                get().updateTotalPrice();
             },
             reduceFromCart: (product: Product) => {
                 const cart = get().cart
@@ -146,12 +140,13 @@ export const useCartStore = create(
                     }));
                 };
 
-                // Update the total price
-                get().updateTotalPrice();
-
+                
                 // Update whether cart is empty, delivery fee and total price
                 get().updateIsCartEmpty();
                 get().updateDeliveryFee();
+                
+                // Update the total price
+                get().updateTotalPrice();
             },
             updateIsCartEmpty() {
                 const cart = get().cart;
