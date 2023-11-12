@@ -5,10 +5,11 @@ export default function BackArrow() {
 
     const toggleCheckout = useOverlayStore(state => state.toggleCheckout);
     const isDeliveryScreenOpen = useScreenStore(state => state.Screens.isDeliveryScreenOpen);
+    const isPaymentLoading = useScreenStore(state => state.Screens.isPaymentLoading);
 
     return (
         <div className={`left-6 top-6
-            ${isDeliveryScreenOpen ? "absolute" : "hidden"}
+            ${isDeliveryScreenOpen && !isPaymentLoading ? "absolute" : "hidden"}
         `}>
             <button className="" onClick={toggleCheckout}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

@@ -28,6 +28,7 @@ export interface Screens {
     isDeliveryScreenOpen: boolean
     isPaymentScreenOpen: boolean
     isConfirmationScreenOpen: boolean
+    isPaymentLoading: boolean
 }
 
 export type OrderData = {

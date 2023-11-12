@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 import { Screens } from "@/app/types";
 
@@ -9,6 +8,7 @@ interface State {
 
 interface Actions {
     activateScreen: (screen: string) => void
+    setIsPaymentLoading: (isLoading: boolean) => void
 }
 
 const INITIAL_STATE: State = {
@@ -16,6 +16,7 @@ const INITIAL_STATE: State = {
         isDeliveryScreenOpen: true,
         isPaymentScreenOpen: false,
         isConfirmationScreenOpen: false,
+        isPaymentLoading: false,
     },
 }
 
@@ -23,41 +24,37 @@ export const useScreenStore = create<State & Actions>(set => ({
     Screens: INITIAL_STATE.Screens,
 
     // activate selected screen and deactivate others
-    activateScreen: (screen: string) => {
+    activateScreen: (screen:string = "reset") => {
+        let newIsDeliveryScreenOpen:boolean, newIsPaymentScreenOpen:boolean, newIsConfirmationScreenOpen:boolean = false;
         switch (screen) {
             case "reset":
-                set((state: State) => ({
-                    ...state,
-                    Screens: {
-                        ...{ isDeliveryScreenOpen: true,
-                            isPaymentScreenOpen: false,
-                            isConfirmationScreenOpen: false,
-                        },
-                    },
-                }));
+                newIsDeliveryScreenOpen = true;
                 break;
             case "payment":
-                set((state: State) => ({
-                    ...state,
-                    Screens: {
-                        ...{ isDeliveryScreenOpen: false,
-                            isPaymentScreenOpen: true,
-                            isConfirmationScreenOpen: false,
-                        },
-                    },
-                }));
+                newIsPaymentScreenOpen = true;
                 break;
             case "confirmation":
-                set((state: State) => ({
-                    ...state,
-                    Screens: {
-                        ...{ isDeliveryScreenOpen: false,
-                            isPaymentScreenOpen: false, 
-                            isConfirmationScreenOpen: true,
-                        },
-                    },
-                }));
+                newIsConfirmationScreenOpen = true;
                 break;
         }
-    }
+        set((state: State) => ({
+            ...state,
+            Screens: {
+                ...state.Screens,
+                ...{ isDeliveryScreenOpen: newIsDeliveryScreenOpen,
+                    isPaymentScreenOpen: newIsPaymentScreenOpen,
+                    isConfirmationScreenOpen: newIsConfirmationScreenOpen,
+                },
+            },
+        }));
+    },
+    setIsPaymentLoading: (isLoading: boolean) => {
+        set((state: State) => ({
+            ...state,
+            Screens: {
+                ...state.Screens,
+                isPaymentLoading: isLoading,
+            },
+        }));
+    },
 }));
