@@ -15,6 +15,7 @@ interface Actions {
     openCheckout: () => void
     openRemoveProductModal: (product: Product) => void
     openEmailConfirmModal: (name: string) => void
+    openErrorModal: (message: string) => void
     closeModal: () => void
     setOverlays: (
         mobileNav?: boolean,
@@ -38,6 +39,7 @@ const INITIAL_STATE: State = {
         modalType: null,
         removingProduct: null,
         emailName: null,
+        errorMessage: null,
     }
 }
 
@@ -79,6 +81,21 @@ export const useOverlayStore = create<State & Actions>((set, get) => ({
                 ...state.modalContent,
                 modalType: 'emailConfirm',
                 emailName: name
+            }
+        }));
+    },
+    // Open error modal
+    openErrorModal: (message: string) => {
+        set((state: State) => ({
+            ...state,
+            Overlays: {
+                ...state.Overlays,
+                ...{ isModalOpen: true },
+            },
+            modalContent: {
+                ...state.modalContent,
+                modalType: 'error',
+                errorMessage: message
             }
         }));
     },

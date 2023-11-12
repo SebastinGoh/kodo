@@ -6,15 +6,17 @@ import { set, useForm } from 'react-hook-form';
 import AddressFields from '@/app/components/checkout/delivery/address-fields';
 import { useScreenStore } from "@/app/store/useScreenStore";
 import { OrderData } from '@/app/types';
-import { handleOrder } from '@/app/components/checkout/delivery/handle-order';
+import { generatePaymentUrl } from '@/app/components/checkout/delivery/handle-order';
 import { useCartStore } from "@/app/store/useCartStore";
 import useFromStore from "@/app/hooks/useFromStore";
+import { useOverlayStore } from "@/app/store/useOverlayStore";
 
 import { useRouter } from 'next/navigation';
 
 const DeliveryForm: FC = () => {
   const router = useRouter();
   const activateScreen = useScreenStore(state => state.activateScreen);
+  const openErrorModal = useOverlayStore(state => state.openErrorModal);
 
   const cart = useFromStore(useCartStore, state => state.cart) ?? [];
   const totalPrice = useFromStore(useCartStore, state => state.totalPrice) ?? 0;
@@ -45,13 +47,16 @@ const DeliveryForm: FC = () => {
 
     const fetchPaymentUrl = () => {
       
-      handleOrder(data)
+      generatePaymentUrl(data)
       .then((res) => {
-        if (setPaymentUrl) {
-          setPaymentUrl(res);
-          router.push(res);
-          setIsLoading(false);
+        alert(res.status);
+        if (res.status != 200 && res.message) {
+          openErrorModal(res.message);
+        } else if (setPaymentUrl) {
+          setPaymentUrl(res.paymentUrl);
+          router.push(res.paymentUrl);
         }
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);

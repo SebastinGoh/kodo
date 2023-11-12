@@ -21,6 +21,7 @@ export interface ModalContent {
     modalType: string | null
     removingProduct: Product | null
     emailName: string | null
+    errorMessage: string | null
 }
 
 export interface Screens {

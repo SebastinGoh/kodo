@@ -1,13 +1,33 @@
 import { OrderData } from "@/app/types";
 
-export async function handleOrder(data:OrderData) {
-    const orderPromise = createOrder(data);
-    const order = await orderPromise;
-    data["insertedId"] = order.insertedId.toString();
+export async function generatePaymentUrl(data:OrderData) {
+    try {
+        const orderPromise = createOrder(data);
+        const order = await orderPromise;
+        if (!order.insertedId) {
+            return { status:500, message:"Database Error: Order ID not found" };
+        }
+        data["insertedId"] = order.insertedId.toString();
+    } catch (err) {
+        if (err instanceof Error) {
+            return { status:500, message:"Database Error: " + err.message };
+        }
+        return { status:500, message:"Database Error: " + err };
+    }
     
-    const paymentPromise = createPayment(data);
-    const payment = await paymentPromise;
-    return payment.url;
+    try {
+        const paymentPromise = createPayment(data);
+        const payment = await paymentPromise;
+        if (!payment.url) {
+            return { status:500, message:"Payment Gateway Error: " + payment.message };
+        }
+        return { status:200, paymentUrl: payment.url };
+    } catch (err) {
+        if (err instanceof Error) {
+            return { status:500, message:"Payment Gateway Error: " + err.message };
+        }
+        return { status:500, message:"Payment Gateway Error: " + err };
+    }
 }
 
 function createOrder(data:OrderData) {
@@ -22,7 +42,7 @@ function createOrder(data:OrderData) {
         return response;
     })
     .catch((err) => {
-        alert("Error making order in MongoDB: " + err.message);
+        return err;
     });
     return orderPromise;
 }
@@ -42,7 +62,7 @@ function createPayment(data:OrderData) {
         return response;
     })
     .catch((err) => {
-        alert("Error making payment in HitPay: " + err.message);
+        return err;
     });
     return paymentPromise;
 }
