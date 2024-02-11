@@ -60,16 +60,17 @@ const AddressFields: React.FC<Props> = (
         });
     };
     return (
-        <div className='w-full relative'>
+        <div className='w-full'>
             <input
                 id='address'
-                className='w-full rounded-lg border border-gray-300 bg-white py-3 px-6 text-lg focus:shadow-md'
+                className='w-full h-11 text-lg px-3 border-transparent focus:border-transparent peer'
                 value={value}
                 onChange={handleAddressChange}
-                placeholder='Address*'
+                placeholder=' '
             />
+            <div className="border-beige absolute top-full transition-all duration-300 bg-beige w-0 h-1 peer-focus:w-full"></div>
             {status === 'OK' && (
-                <div className="bg-white rounded-lg shadow mt-2 fixed">
+                <div className="bg-white rounded-md shadow mt-2 fixed z-40">
                     <ul className="h-40 overflow-y-auto rounded-lg">
                         {renderSuggestions()}
                     </ul>
