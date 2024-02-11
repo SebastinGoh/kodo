@@ -38,8 +38,8 @@ export type OrderData = {
     block: string;
     postalcode: string;
     remarks: string;
-    paymentSuccess: boolean;
     cart: Product[];
+    deliveryFee: number;
     totalPrice: number;
     insertedId: string;
 }

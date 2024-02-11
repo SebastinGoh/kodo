@@ -4,8 +4,7 @@ import { OrderData } from '@/app/types';
 
 export async function POST(request: NextRequest) {
     const data: OrderData = await request.json();
-    data["paymentSuccess"] = false;
-
+    data["deliveryFee"] = 5;
     const dbname = process.env.DB_NAME as string;
     const collectionName = "orders";
     const ordersCollection = (await clientPromise).db(dbname).collection(collectionName);
